@@ -22,6 +22,7 @@
 		1EB1E83D201A390E00152D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EB1E840201A390E00152D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1EB1E842201A390E00152D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EB1E849201C3C8900152D17 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +41,7 @@
 			children = (
 				1EB1E835201A390E00152D17 /* bluetoothlab */,
 				1EB1E834201A390E00152D17 /* Products */,
+				1EB1E848201C3C8900152D17 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +64,14 @@
 				1EB1E842201A390E00152D17 /* Info.plist */,
 			);
 			path = bluetoothlab;
+			sourceTree = "<group>";
+		};
+		1EB1E848201C3C8900152D17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EB1E849201C3C8900152D17 /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,7 +287,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EP4K2BVKV2;
 				INFOPLIST_FILE = bluetoothlab/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.don.bluetoothlab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -293,7 +302,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EP4K2BVKV2;
 				INFOPLIST_FILE = bluetoothlab/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.don.bluetoothlab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
