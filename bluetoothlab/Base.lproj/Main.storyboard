@@ -35,16 +35,19 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ciw-Tc-N3m">
                                 <rect key="frame" x="109" y="573" width="157" height="49"/>
-                                <color key="backgroundColor" red="0.79913634061813354" green="0.92715340852737427" blue="0.21037411689758301" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99589735269546509" green="0.70193105936050415" blue="0.022409051656723022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="157" id="aG5-Vn-Iim"/>
                                     <constraint firstAttribute="height" constant="49" id="ed5-R6-ANt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                <color key="tintColor" red="0.072243370115756989" green="0.81225281953811646" blue="0.78843992948532104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Send">
+                                <color key="tintColor" red="0.96806353330612183" green="0.50867295265197754" blue="0.049708269536495209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Disconnect">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="disconnectTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="egc-vH-IRF"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advertising String" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTM-Vp-PBk">
                                 <rect key="frame" x="119.5" y="50" width="136" height="21"/>
@@ -78,7 +81,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTb-pW-IUk">
                                 <rect key="frame" x="109" y="506" width="157" height="49"/>
-                                <color key="backgroundColor" red="0.89033597707748413" green="0.6574934720993042" blue="0.051720075309276581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.79913634061813354" green="0.92715340852737427" blue="0.21037411689758301" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="C2y-tg-sAZ"/>
                                     <constraint firstAttribute="width" constant="157" id="Vl3-HJ-FmM"/>
@@ -113,9 +116,9 @@
                     </view>
                     <connections>
                         <outlet property="connectButton" destination="zTb-pW-IUk" id="KlY-6t-Qye"/>
+                        <outlet property="disconnectButton" destination="Ciw-Tc-N3m" id="qVc-GW-LQw"/>
                         <outlet property="inputTextField" destination="Mtm-7q-WJ4" id="wPR-69-GRz"/>
                         <outlet property="receivedTextField" destination="BUa-KE-2gq" id="epV-AW-lqc"/>
-                        <outlet property="sendButton" destination="Ciw-Tc-N3m" id="qVc-GW-LQw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

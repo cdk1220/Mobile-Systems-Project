@@ -15,13 +15,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var receivedTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var disconnectButton: UIButton!
     
+    //Bluetooth attributes
     var centralManager: CBCentralManager!
     var genericPeripheral: CBPeripheral!
-    let genericServiceCBUUID = CBUUID(string: "0x180D")
+    let genericServiceCBUUID = CBUUID(string: "0x180D") //Need to change this to the right kind
     let stringCharacteristicCBUUID = CBUUID(string: "2A3D")
     let defaultAdvertisingString = "Hello there!"
+    
+    
     
     
     override func viewDidLoad() {
@@ -33,7 +36,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         //Buttons should be hidden before there is a viable connection
         connectButton.isHidden = true
-        sendButton.isHidden = true
+        disconnectButton.isHidden = true
     
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
@@ -58,25 +61,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //Connect button tapped action handler
     @IBAction func connectTapped(_ sender: Any) {
         centralManager.connect(genericPeripheral)
-        connectButton.isHidden = true
     }
     
+    //Disconnect button tapped action handler
+    @IBAction func disconnectTapped(_ sender: Any) {
+        centralManager.cancelPeripheralConnection(genericPeripheral)
+    }
 }
 
 
 //Functions that handle the central role when the app is central
 extension ViewController: CBCentralManagerDelegate {
     
+    //When the cental manager fails to create a connection with a peripheral, this gets triggered
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        connectButton.isHidden = true
+        print("this gets called")
+        connectButton.isHidden = true                                       //Failed to get connected to the chosen peripheral, therefore hide it
+        centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])   //Since the attempted connection failed try again
     }
     
+    //When an existing connection to a peripheral is broken, this gets triggered
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        connectButton.isHidden = true
+        disconnectButton.isHidden = true
         centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])
     }
- 
     
+    //When the bluetooth status gets changed, this gets triggered
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .unknown:
@@ -89,12 +99,16 @@ extension ViewController: CBCentralManagerDelegate {
             print("central.state is .unauthorized")
         case .poweredOff:
             print("central.state is .poweredOff")
+            let alert = UIAlertController(title: "Alert", message: "Turn bluetooth on!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         case .poweredOn:
             print("central.state is .poweredOn")
             centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])
         }
     }
     
+    //When a peripheral is discovered, this gets triggered
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print(peripheral)
         genericPeripheral = peripheral
@@ -103,10 +117,14 @@ extension ViewController: CBCentralManagerDelegate {
         connectButton.isHidden = false //Since there is a peripheral to connect to, display connect button
     }
     
+    //When a connection with a peripheral is established, this gets triggered
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected")
+        connectButton.isHidden = true          //Since there is a peripheral that the app is connected to, hide it
+        disconnectButton.isHidden = false       //Since there is a connection to disconnect, make it appear
         genericPeripheral.discoverServices([genericServiceCBUUID])
     }
+    
 }
 
 
