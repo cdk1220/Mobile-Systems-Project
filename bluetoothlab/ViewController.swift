@@ -23,13 +23,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let genericServiceCBUUID = CBUUID(string: "0x180D") //Need to change this to the right kind
     let stringCharacteristicCBUUID = CBUUID(string: "2A3D")
     let defaultAdvertisingString = "Hello there!"
-    
-    
-    
+    var successful: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //Advertising text field initialization settings
         inputTextField.text = defaultAdvertisingString
         inputTextField.delegate = self;
@@ -37,8 +35,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //Buttons should be hidden before there is a viable connection
         connectButton.isHidden = true
         disconnectButton.isHidden = true
-    
+        
+        //Bluetooth initiation
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        successful = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,12 +61,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //Connect button tapped action handler
     @IBAction func connectTapped(_ sender: Any) {
         centralManager.connect(genericPeripheral)
+        successful = false
+        self.perform(#selector(connectionTimeout), with: nil, afterDelay: 5)
     }
     
     //Disconnect button tapped action handler
     @IBAction func disconnectTapped(_ sender: Any) {
         centralManager.cancelPeripheralConnection(genericPeripheral)
     }
+    
+    //Connection timeout method
+    @objc func connectionTimeout() {
+        if !successful {
+            centralManager.cancelPeripheralConnection(genericPeripheral)
+            connectButton.isHidden = true
+            centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])
+        }
+    }
+    
+    
 }
 
 
@@ -120,6 +133,7 @@ extension ViewController: CBCentralManagerDelegate {
     //When a connection with a peripheral is established, this gets triggered
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected")
+        successful = true
         connectButton.isHidden = true          //Since there is a peripheral that the app is connected to, hide it
         disconnectButton.isHidden = false       //Since there is a connection to disconnect, make it appear
         genericPeripheral.discoverServices([genericServiceCBUUID])
