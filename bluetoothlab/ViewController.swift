@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var receivedTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var disconnectButton: UIButton!
+    @IBOutlet weak var connectionDetails: UILabel!
     
     //Bluetooth attributes
     var centralManager: CBCentralManager!
@@ -28,13 +29,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Connection details label initialization settings
+        connectionDetails.text = nil
+
         //Advertising text field initialization settings
         inputTextField.text = defaultAdvertisingString
         inputTextField.delegate = self;
         
-        //Buttons should be hidden before there is a viable connection
+        //Connect button initialization settings
         connectButton.isHidden = true
+        connectButton.layer.cornerRadius = 10
+        
+        //Disonnect button initialization settings
         disconnectButton.isHidden = true
+        disconnectButton.layer.cornerRadius = 10
         
         //Bluetooth initiation
         centralManager = CBCentralManager(delegate: self, queue: nil)
@@ -96,6 +104,7 @@ extension ViewController: CBCentralManagerDelegate {
     //When an existing connection to a peripheral is broken, this gets triggered
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         disconnectButton.isHidden = true
+        connectionDetails.text = nil
         centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])
     }
     
@@ -133,6 +142,7 @@ extension ViewController: CBCentralManagerDelegate {
     //When a connection with a peripheral is established, this gets triggered
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected")
+        connectionDetails.text = "Connected to " + peripheral.name!
         successful = true
         connectButton.isHidden = true          //Since there is a peripheral that the app is connected to, hide it
         disconnectButton.isHidden = false       //Since there is a connection to disconnect, make it appear
