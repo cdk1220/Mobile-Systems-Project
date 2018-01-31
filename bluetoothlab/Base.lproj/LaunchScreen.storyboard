@@ -53,9 +53,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guide-logo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0e0-vr-E9o">
-                                <rect key="frame" x="36" y="107" width="316" height="437"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide-logo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0e0-vr-E9o">
+                                <rect key="frame" x="29.5" y="115" width="316" height="437"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="316" id="8Z4-DB-G7o"/>
+                                    <constraint firstAttribute="height" constant="437" id="nhR-y5-cHd"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -63,8 +66,10 @@
                             <constraint firstItem="u6z-2P-pSk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5j9-cf-5m6"/>
                             <constraint firstItem="k09-VM-QZu" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6WS-xr-hzw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="u6z-2P-pSk" secondAttribute="bottom" constant="50" id="K75-65-rey"/>
+                            <constraint firstItem="0e0-vr-E9o" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PGw-1f-Fx9"/>
                             <constraint firstItem="rcp-6b-8rB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZAT-O8-5R9"/>
                             <constraint firstItem="k09-VM-QZu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="lsJ-We-QVy"/>
+                            <constraint firstItem="0e0-vr-E9o" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qv6-10-B0t"/>
                             <constraint firstItem="u6z-2P-pSk" firstAttribute="top" secondItem="rcp-6b-8rB" secondAttribute="bottom" constant="3" id="yVJ-Mt-Oss"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

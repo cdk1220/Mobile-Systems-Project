@@ -23,9 +23,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var genericPeripheral: CBPeripheral!
     let genericServiceCBUUID = CBUUID(string: "0x180D") //Need to change this to the right kind
     let stringCharacteristicCBUUID = CBUUID(string: "2A3D")
-    let defaultAdvertisingString = "Hello there!"
+    var defaultAdvertisingString = "Hello there!"
     var successful: Bool!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,6 +54,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    //When the user has done typing the advertising string, record the change
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        defaultAdvertisingString = inputTextField.text ?? " "
+    }
     
     //Hide keyboard when the user touches outside keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

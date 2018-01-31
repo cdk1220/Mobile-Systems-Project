@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E2BE0432020D8C500A8B6C7 /* guide-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E2BE0422020D8C500A8B6C7 /* guide-logo.jpg */; };
+		1E2BE04720213A7D00A8B6C7 /* guide-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */; };
 		1EB1E837201A390E00152D17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1E836201A390E00152D17 /* AppDelegate.swift */; };
-		1EB1E839201A390E00152D17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1E838201A390E00152D17 /* ViewController.swift */; };
+		1EB1E839201A390E00152D17 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1E838201A390E00152D17 /* MainViewController.swift */; };
 		1EB1E83C201A390E00152D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83A201A390E00152D17 /* Main.storyboard */; };
 		1EB1E83E201A390E00152D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83D201A390E00152D17 /* Assets.xcassets */; };
 		1EB1E841201A390E00152D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E2BE0422020D8C500A8B6C7 /* guide-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guide-logo.jpg"; sourceTree = "<group>"; };
+		1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guide-logo.jpg"; sourceTree = "<group>"; };
 		1EB1E833201A390E00152D17 /* bluetoothlab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetoothlab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB1E836201A390E00152D17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1EB1E838201A390E00152D17 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1EB1E838201A390E00152D17 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1EB1E83B201A390E00152D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1EB1E83D201A390E00152D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EB1E840201A390E00152D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,9 +58,9 @@
 		1EB1E835201A390E00152D17 /* bluetoothlab */ = {
 			isa = PBXGroup;
 			children = (
-				1E2BE0422020D8C500A8B6C7 /* guide-logo.jpg */,
+				1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */,
 				1EB1E836201A390E00152D17 /* AppDelegate.swift */,
-				1EB1E838201A390E00152D17 /* ViewController.swift */,
+				1EB1E838201A390E00152D17 /* MainViewController.swift */,
 				1EB1E83A201A390E00152D17 /* Main.storyboard */,
 				1EB1E83D201A390E00152D17 /* Assets.xcassets */,
 				1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */,
@@ -137,7 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EB1E841201A390E00152D17 /* LaunchScreen.storyboard in Resources */,
-				1E2BE0432020D8C500A8B6C7 /* guide-logo.jpg in Resources */,
+				1E2BE04720213A7D00A8B6C7 /* guide-logo.jpg in Resources */,
 				1EB1E83E201A390E00152D17 /* Assets.xcassets in Resources */,
 				1EB1E83C201A390E00152D17 /* Main.storyboard in Resources */,
 			);
@@ -150,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EB1E839201A390E00152D17 /* ViewController.swift in Sources */,
+				1EB1E839201A390E00152D17 /* MainViewController.swift in Sources */,
 				1EB1E837201A390E00152D17 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
