@@ -79,6 +79,24 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    //Allow only 20 characters in the input text field so as not to advertise a string longer than 20 characters
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var startString = ""
+        if (textField.text != nil) {
+            startString += textField.text!
+        }
+        
+        startString += string
+        let limitNumber = startString.count
+        
+        if limitNumber > 20 {
+            return false
+        }
+        else{
+            return true;
+        }
+    }
+    
     //When the user has done typing the advertising string, record the change
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         advertisingString = inputTextField.text ?? " "
