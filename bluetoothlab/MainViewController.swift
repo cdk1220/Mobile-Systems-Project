@@ -58,6 +58,19 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         //Bluetooth peripheral role initiation
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        
+        //Creating service and characteristic
+        transferCharacteristic = CBMutableCharacteristic(
+            type: transferCharacteristicCBUUID,
+            properties: [CBCharacteristicProperties.read, CBCharacteristicProperties.write, CBCharacteristicProperties.notify],
+            value: nil,
+            permissions: [CBAttributePermissions.readable, CBAttributePermissions.writeable]
+        )
+        transferService = CBMutableService(
+            type: transferServiceCBUUID,
+            primary: true
+        )
+        transferService.characteristics = [transferCharacteristic]
         dataToSend = advertisingString.data(using: String.Encoding.utf8)!
     }
 
@@ -70,6 +83,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         advertisingString = inputTextField.text ?? " "
         dataToSend = advertisingString.data(using: String.Encoding.utf8)
+        transferCharacteristic.value = dataToSend
+        peripheralManager.updateValue(dataToSend, for: transferCharacteristic, onSubscribedCentrals: nil)
     }
     
     //Hide keyboard when the user touches outside keyboard
@@ -184,6 +199,7 @@ extension MainViewController: CBPeripheralDelegate {
         
         for characteristic in characteristics {
             print(characteristic)
+            discoveredPeripheral.setNotifyValue(true, for: characteristic)
             discoveredPeripheral.readValue(for: characteristic)
         }
     }
@@ -194,6 +210,10 @@ extension MainViewController: CBPeripheralDelegate {
             return
         }
         receivedTextField.text = stringFromData as String
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        discoveredPeripheral.readValue(for: characteristic)
     }
 }
 
@@ -212,20 +232,7 @@ extension MainViewController: CBPeripheralManagerDelegate {
             print("peripheral.state is .poweredOff")
         case .poweredOn:
             print("peripheral.state is .poweredOn")
-            //Creating service and characteristic
-            transferCharacteristic = CBMutableCharacteristic(
-                type: transferCharacteristicCBUUID,
-                properties: [CBCharacteristicProperties.read, CBCharacteristicProperties.write, CBCharacteristicProperties.notify],
-                value: nil,
-                permissions: [CBAttributePermissions.readable, CBAttributePermissions.writeable]
-            )
-            transferService = CBMutableService(
-                type: transferServiceCBUUID,
-                primary: true
-            )
-            transferService.characteristics = [transferCharacteristic]
             peripheralManager.add(transferService)
-            
             peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [transferServiceCBUUID]])
         }
     }
