@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class MainViewController: UIViewController, UITextFieldDelegate {
 
     //Storyboard attributes
     @IBOutlet weak var inputTextField: UITextField!
@@ -18,13 +18,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var disconnectButton: UIButton!
     @IBOutlet weak var connectionDetails: UILabel!
     
-    //Bluetooth attributes
+    //Bluetooth central role attributes
     var centralManager: CBCentralManager!
-    var genericPeripheral: CBPeripheral!
-    let genericServiceCBUUID = CBUUID(string: "0x180D") //Need to change this to the right kind
-    let stringCharacteristicCBUUID = CBUUID(string: "2A3D")
-    var defaultAdvertisingString = "Hello there!"
+    var discoveredPeripheral: CBPeripheral!
     var successful: Bool!
+    
+    //Bluetooth peripheral role attributes
+    var peripheralManager: CBPeripheralManager!
+    var transferCharacteristic: CBMutableCharacteristic!
+    var transferService: CBMutableService!
+    
+    //Bluetooth advertising and subscribing attributes
+    var advertisingString = "Hello there!"
+    var dataToSend: Data!
+    let transferServiceCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF26")
+    let transferCharacteristicCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF25")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +41,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         connectionDetails.text = nil
 
         //Advertising text field initialization settings
-        inputTextField.text = defaultAdvertisingString
+        inputTextField.text = advertisingString
         inputTextField.delegate = self;
         
         //Connect button initialization settings
@@ -44,9 +52,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         disconnectButton.isHidden = true
         disconnectButton.layer.cornerRadius = 10
         
-        //Bluetooth initiation
+        //Bluetooth cental role initiation
         centralManager = CBCentralManager(delegate: self, queue: nil)
         successful = false
+        
+        //Bluetooth peripheral role initiation
+        peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        dataToSend = advertisingString.data(using: String.Encoding.utf8)!
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +68,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //When the user has done typing the advertising string, record the change
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        defaultAdvertisingString = inputTextField.text ?? " "
+        advertisingString = inputTextField.text ?? " "
+        dataToSend = advertisingString.data(using: String.Encoding.utf8)
     }
     
     //Hide keyboard when the user touches outside keyboard
@@ -72,45 +85,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //Connect button tapped action handler
     @IBAction func connectTapped(_ sender: Any) {
-        centralManager.connect(genericPeripheral)
+        centralManager.connect(discoveredPeripheral)
         successful = false
         self.perform(#selector(connectionTimeout), with: nil, afterDelay: 5)
     }
     
     //Disconnect button tapped action handler
     @IBAction func disconnectTapped(_ sender: Any) {
-        centralManager.cancelPeripheralConnection(genericPeripheral)
+        centralManager.cancelPeripheralConnection(discoveredPeripheral)
     }
     
     //Connection timeout method
     @objc func connectionTimeout() {
         if !successful {
-            centralManager.cancelPeripheralConnection(genericPeripheral)
+            centralManager.cancelPeripheralConnection(discoveredPeripheral)
             connectButton.isHidden = true
-            centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])
+            centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])
         }
     }
-    
-    
 }
 
 
 //Functions that handle the central role when the app is central
-extension ViewController: CBCentralManagerDelegate {
-    
-    //When the cental manager fails to create a connection with a peripheral, this gets triggered
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("this gets called")
-        connectButton.isHidden = true                                       //Failed to get connected to the chosen peripheral, therefore hide it
-        centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])   //Since the attempted connection failed try again
-    }
-    
-    //When an existing connection to a peripheral is broken, this gets triggered
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        disconnectButton.isHidden = true
-        connectionDetails.text = nil
-        centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])
-    }
+extension MainViewController: CBCentralManagerDelegate {
     
     //When the bluetooth status gets changed, this gets triggered
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -130,18 +127,33 @@ extension ViewController: CBCentralManagerDelegate {
             self.present(alert, animated: true, completion: nil)
         case .poweredOn:
             print("central.state is .poweredOn")
-            centralManager.scanForPeripherals(withServices: [genericServiceCBUUID])
+            centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])
         }
     }
     
     //When a peripheral is discovered, this gets triggered
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print(peripheral)
-        genericPeripheral = peripheral
-        genericPeripheral.delegate = self
+        discoveredPeripheral = peripheral
+        discoveredPeripheral.delegate = self
         centralManager.stopScan()
         connectButton.isHidden = false //Since there is a peripheral to connect to, display connect button
     }
+    
+    //When the cental manager fails to create a connection with a peripheral, this gets triggered
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("this gets called")
+        connectButton.isHidden = true                                        //Failed to get connected to the chosen peripheral, therefore hide it
+        centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])   //Since the attempted connection failed try again
+    }
+    
+    //When an existing connection to a peripheral is broken, this gets triggered
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        disconnectButton.isHidden = true
+        connectionDetails.text = nil
+        centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])
+    }
+    
     
     //When a connection with a peripheral is established, this gets triggered
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -150,20 +162,20 @@ extension ViewController: CBCentralManagerDelegate {
         successful = true
         connectButton.isHidden = true          //Since there is a peripheral that the app is connected to, hide it
         disconnectButton.isHidden = false       //Since there is a connection to disconnect, make it appear
-        genericPeripheral.discoverServices([genericServiceCBUUID])
+        discoveredPeripheral.discoverServices([transferServiceCBUUID])
     }
     
 }
 
 
 //Functions that handle the peripheral role when the app is central
-extension ViewController: CBPeripheralDelegate {
+extension MainViewController: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
         
         for service in services {
             print(service)
-            peripheral.discoverCharacteristics(nil, for: service)
+            discoveredPeripheral.discoverCharacteristics([transferCharacteristicCBUUID], for: service)
         }
     }
     
@@ -172,16 +184,65 @@ extension ViewController: CBPeripheralDelegate {
         
         for characteristic in characteristics {
             print(characteristic)
+            discoveredPeripheral.readValue(for: characteristic)
         }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        switch characteristic.uuid {
-        case stringCharacteristicCBUUID:
-            print(characteristic.value ?? "no value")
-        default:
-            print("Unhandled Characteristic UUID: \(characteristic.uuid)")
+        guard let stringFromData = NSString(data: characteristic.value!, encoding: String.Encoding.utf8.rawValue) else {
+            print("Invalid data")
+            return
         }
+        receivedTextField.text = stringFromData as String
     }
 }
+
+extension MainViewController: CBPeripheralManagerDelegate {
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        switch peripheral.state {
+        case .unknown:
+            print("peripheral.state is .unknown")
+        case .resetting:
+            print("peripheral.state is .resetting")
+        case .unsupported:
+            print("peripheral.state is .unsupported")
+        case .unauthorized:
+            print("peripheral.state is .unauthorized")
+        case .poweredOff:
+            print("peripheral.state is .poweredOff")
+        case .poweredOn:
+            print("peripheral.state is .poweredOn")
+            //Creating service and characteristic
+            transferCharacteristic = CBMutableCharacteristic(
+                type: transferCharacteristicCBUUID,
+                properties: [CBCharacteristicProperties.read, CBCharacteristicProperties.write, CBCharacteristicProperties.notify],
+                value: nil,
+                permissions: [CBAttributePermissions.readable, CBAttributePermissions.writeable]
+            )
+            transferService = CBMutableService(
+                type: transferServiceCBUUID,
+                primary: true
+            )
+            transferService.characteristics = [transferCharacteristic]
+            peripheralManager.add(transferService)
+            
+            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [transferServiceCBUUID]])
+        }
+    }
+    
+    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
+        
+        // Set the correspondent characteristic's value
+        // to the request
+        request.value = dataToSend!
+        
+        // Respond to the request
+        peripheralManager.respond(
+            to: request,
+            withResult: .success)
+        
+    }
+    
+}
+
 
