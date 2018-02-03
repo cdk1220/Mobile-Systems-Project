@@ -82,6 +82,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     //Allow only 20 characters in the input text field so as not to advertise a string longer than 20 characters
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var startString = ""
+        
         if (textField.text != nil) {
             startString += textField.text!
         }
@@ -92,8 +93,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         if limitNumber > 20 {
             return false
         }
-        else{
-            return true;
+        else {
+            return true
         }
     }
     
@@ -126,6 +127,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     //Disconnect button tapped action handler
     @IBAction func disconnectTapped(_ sender: Any) {
         centralManager.cancelPeripheralConnection(discoveredPeripheral)
+        receivedTextField.text = ""
     }
     
     //Connection timeout method
@@ -256,21 +258,15 @@ extension MainViewController: CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-        
-        // Set the correspondent characteristic's value
-        // to the request
         request.value = dataToSend!
-        
-        // Respond to the request
-        peripheralManager.respond(
-            to: request,
-            withResult: .success)
-        
+        peripheralManager.respond(to: request, withResult: .success)
     }
+    
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
         print("Subscribed")
         peripheralManager.stopAdvertising()
     }
+    
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
         peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [transferServiceCBUUID]])
     }
