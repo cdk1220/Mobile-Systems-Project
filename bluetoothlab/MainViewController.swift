@@ -12,16 +12,16 @@ import CoreBluetooth
 class MainViewController: UIViewController, UITextFieldDelegate {
 
     //Storyboard attributes
-    @IBOutlet weak var inputTextField: UITextField!
-    @IBOutlet weak var receivedTextField: UITextField!
-    @IBOutlet weak var connectButton: UIButton!
-    @IBOutlet weak var disconnectButton: UIButton!
-    @IBOutlet weak var connectionDetails: UILabel!
+    @IBOutlet weak var inputTextField: UITextField!        //As peripheral, the device would expose the string in this text field to be read as a characteristic
+    @IBOutlet weak var receivedTextField: UITextField!     //As central, the device would populate this text field upon reading a peripheral's characteristic
+    @IBOutlet weak var connectButton: UIButton!           //As central, the device would enable the user to connect to a peripheral that has been found by tapping this
+    @IBOutlet weak var disconnectButton: UIButton!        //As central, the device would enable the user to cancel a connection with a peripheral by tapping thus
+    @IBOutlet weak var connectionDetails: UILabel!        //As central, the device would display the name of the peripheral that it is connected to in this label
     
     //Bluetooth central role attributes
     var centralManager: CBCentralManager!
     var discoveredPeripheral: CBPeripheral!
-    var successful: Bool!
+    var successful: Bool!                        //Used to implement a connection timeout method for the central
     
     //Bluetooth peripheral role attributes
     var peripheralManager: CBPeripheralManager!
@@ -71,6 +71,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             primary: true
         )
         transferService.characteristics = [transferCharacteristic]
+        
+        //Advertising string has to be converted to data before sending
         dataToSend = advertisingString.data(using: String.Encoding.utf8)!
     }
 
@@ -98,7 +100,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    //When the user has done typing the advertising string, record the change
+    //When the user has modified the advertising, record the change and notify any connected centrals about said change
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         advertisingString = inputTextField.text ?? " "
         dataToSend = advertisingString.data(using: String.Encoding.utf8)
@@ -127,7 +129,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     //Disconnect button tapped action handler
     @IBAction func disconnectTapped(_ sender: Any) {
         centralManager.cancelPeripheralConnection(discoveredPeripheral)
-        receivedTextField.text = ""
     }
     
     //Connection timeout method
@@ -141,7 +142,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
 }
 
 
-//Functions that handle the central role when the app is central
+//Functions that handle the local central role
 extension MainViewController: CBCentralManagerDelegate {
     
     //When the bluetooth status gets changed, this gets triggered
@@ -168,33 +169,30 @@ extension MainViewController: CBCentralManagerDelegate {
     
     //When a peripheral is discovered, this gets triggered
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print(peripheral)
         discoveredPeripheral = peripheral
         discoveredPeripheral.delegate = self
-        centralManager.stopScan()
+        centralManager.stopScan()     //Can stop scanning as a device is found
         connectButton.isHidden = false //Since there is a peripheral to connect to, display connect button
     }
     
     //When the cental manager fails to create a connection with a peripheral, this gets triggered
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("this gets called")
         connectButton.isHidden = true                                        //Failed to get connected to the chosen peripheral, therefore hide it
         centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])   //Since the attempted connection failed try again
     }
     
     //When an existing connection to a peripheral is broken, this gets triggered
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        disconnectButton.isHidden = true
-        connectionDetails.text = nil
+        disconnectButton.isHidden = true                                          //No need to display the disconnect button anymore as there is nothing to be disconnected from
+        connectionDetails.text = nil                                             //Clear the connection details as there is no active connections
+        receivedTextField.text = ""                                              //Since nothing is being received, clear what has already been received
         centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])
     }
     
-    
     //When a connection with a peripheral is established, this gets triggered
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Connected")
         connectionDetails.text = "Connected to " + peripheral.name!
-        successful = true
+        successful = true                    //Let the connection timeout method know the connection was successful
         connectButton.isHidden = true          //Since there is a peripheral that the app is connected to, hide it
         disconnectButton.isHidden = false       //Since there is a connection to disconnect, make it appear
         discoveredPeripheral.discoverServices([transferServiceCBUUID])
@@ -203,41 +201,47 @@ extension MainViewController: CBCentralManagerDelegate {
 }
 
 
-//Functions that handle the peripheral role when the app is central
+//Functions that handle the remote peripheral role when the app is central
 extension MainViewController: CBPeripheralDelegate {
+    
+    //Gets called when the service we desire has been found
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
         
         for service in services {
-            print(service)
             discoveredPeripheral.discoverCharacteristics([transferCharacteristicCBUUID], for: service)
         }
     }
     
+    //For a particular service, if it has the desired characteristic, this gets called
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let characteristics = service.characteristics else { return }
         
         for characteristic in characteristics {
-            print(characteristic)
-            discoveredPeripheral.setNotifyValue(true, for: characteristic)
-            discoveredPeripheral.readValue(for: characteristic)
+            discoveredPeripheral.setNotifyValue(true, for: characteristic)   //Subscribe to the characteristic so that updates are received when the peripheral changes the characteristic
+            discoveredPeripheral.readValue(for: characteristic)            //Try to read the value of the characteristic from the peripheral
         }
     }
     
+    //The results of trying to read a peripheral characteristic, when arrived in the central, would call this function
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard let stringFromData = NSString(data: characteristic.value!, encoding: String.Encoding.utf8.rawValue) else {
-            print("Invalid data")
             return
         }
         receivedTextField.text = stringFromData as String
     }
     
+    //When the peripheral let you know the characteristic has been updated, read the characteristic again
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
         discoveredPeripheral.readValue(for: characteristic)
     }
 }
 
+
+//Functions that handle the local peripheral role
 extension MainViewController: CBPeripheralManagerDelegate {
+    
+    //When the bluetooth status gets changed, this gets triggered
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         switch peripheral.state {
         case .unknown:
@@ -257,18 +261,20 @@ extension MainViewController: CBPeripheralManagerDelegate {
         }
     }
     
+    //This is called when a central sends a read request
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
         request.value = dataToSend!
         peripheralManager.respond(to: request, withResult: .success)
     }
     
+    //This gets called when a central subscribes to receive update notifications of peripherals characteristics
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        print("Subscribed")
-        peripheralManager.stopAdvertising()
+        peripheralManager.stopAdvertising()     //Stop the scanning as there is a central connected currently
     }
     
+    //This gets called when a connected central unsubscribes a periphera's characteristic
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
-        peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [transferServiceCBUUID]])
+        peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [transferServiceCBUUID]])      //Central was disconnected. Start scannng again
     }
     
 }
