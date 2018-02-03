@@ -13,7 +13,21 @@
 		1EB1E83C201A390E00152D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83A201A390E00152D17 /* Main.storyboard */; };
 		1EB1E83E201A390E00152D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83D201A390E00152D17 /* Assets.xcassets */; };
 		1EB1E841201A390E00152D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */; };
+		1EC9B09B20258DE400522E4A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC9B09A20258DE400522E4A /* CoreBluetooth.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1EC9B09920258D9200522E4A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guide-logo.jpg"; sourceTree = "<group>"; };
@@ -24,7 +38,7 @@
 		1EB1E83D201A390E00152D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EB1E840201A390E00152D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1EB1E842201A390E00152D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1EB1E849201C3C8900152D17 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		1EC9B09A20258DE400522E4A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EC9B09B20258DE400522E4A /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +87,7 @@
 		1EB1E848201C3C8900152D17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1EB1E849201C3C8900152D17 /* CoreBluetooth.framework */,
+				1EC9B09A20258DE400522E4A /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -87,6 +102,7 @@
 				1EB1E82F201A390E00152D17 /* Sources */,
 				1EB1E830201A390E00152D17 /* Frameworks */,
 				1EB1E831201A390E00152D17 /* Resources */,
+				1EC9B09920258D9200522E4A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

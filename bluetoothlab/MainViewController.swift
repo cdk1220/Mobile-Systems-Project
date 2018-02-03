@@ -267,6 +267,13 @@ extension MainViewController: CBPeripheralManagerDelegate {
             withResult: .success)
         
     }
+    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
+        print("Subscribed")
+        peripheralManager.stopAdvertising()
+    }
+    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
+        peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [transferServiceCBUUID]])
+    }
     
 }
 
