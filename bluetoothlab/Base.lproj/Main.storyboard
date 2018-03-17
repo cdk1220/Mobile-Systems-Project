@@ -131,39 +131,43 @@
                         <outlet property="disconnectButton" destination="Ciw-Tc-N3m" id="qVc-GW-LQw"/>
                         <outlet property="inputTextField" destination="Mtm-7q-WJ4" id="wPR-69-GRz"/>
                         <outlet property="receivedTextField" destination="BUa-KE-2gq" id="epV-AW-lqc"/>
-                        <segue destination="t6g-jv-rIy" kind="show" identifier="ToFileSharingViewController" id="pvA-kv-OFw"/>
+                        <segue destination="K9k-hO-2c3" kind="show" identifier="ToFileServerViewController" id="lps-VL-pyx"/>
+                        <segue destination="3Ec-CQ-eQP" kind="show" identifier="ToFileClientViewController" id="XZw-LO-Ccz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-304.80000000000001" y="271.21439280359823"/>
         </scene>
-        <!--File Sharing View Controller-->
-        <scene sceneID="9jv-EW-v2p">
+        <!--File Server View Controller-->
+        <scene sceneID="mPI-Ob-b5j">
             <objects>
-                <viewController id="t6g-jv-rIy" customClass="FileSharingViewController" customModule="bluetoothlab" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RBV-kR-Qod">
+                <viewController id="K9k-hO-2c3" customClass="FileServerViewController" customModule="bluetoothlab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yyG-aA-p8g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfC-jR-lpm">
-                                <rect key="frame" x="166" y="323" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="0oX-UM-l7E"/>
+                        <viewLayoutGuide key="safeArea" id="nQr-73-Yfm"/>
                     </view>
-                    <connections>
-                        <outlet property="role" destination="cfC-jR-lpm" id="K6l-eK-QrG"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2WL-Mt-pR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EyB-G8-kDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="271"/>
+            <point key="canvasLocation" x="585" y="-82"/>
+        </scene>
+        <!--File Client View Controller-->
+        <scene sceneID="7GY-1n-80X">
+            <objects>
+                <viewController id="3Ec-CQ-eQP" customClass="FileClientViewController" customModule="bluetoothlab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CCI-wD-o4I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Rkk-Dg-0AS"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7au-h2-G6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="585" y="577"/>
         </scene>
     </scenes>
 </document>

@@ -32,8 +32,6 @@ class MainViewController: UIViewController {
     var dataToSend: Data!
     let transferServiceCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF26")
     let transferCharacteristicCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF25")
-    
-    var roleNext: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,9 +79,14 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //Check for the destination controller and pass the right IP address
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let FileSharingViewController = segue.destination as? FileSharingViewController {
-            FileSharingViewController.currentRole = roleNext
+        
+        if let FileServerViewController = segue.destination as? FileServerViewController {
+            FileServerViewController.peerID = inputTextField.text!
+        }
+        else if let FileClientViewController = segue.destination as? FileClientViewController {
+            FileClientViewController.peerID = receivedTextField.text!
         }
     }
     
@@ -232,11 +235,8 @@ extension MainViewController: CBPeripheralDelegate {
         }
         receivedTextField.text = stringFromData as String
         
-        //Assigning the what its next role is
-        roleNext = "client"
-        
         //Got the IP, go to the next view controller
-        performSegue(withIdentifier: "ToFileSharingViewController", sender: self)
+        performSegue(withIdentifier: "ToFileClientViewController", sender: self)
     }
 }
 
@@ -270,11 +270,8 @@ extension MainViewController: CBPeripheralManagerDelegate {
         peripheralManager.respond(to: request, withResult: .success)
         peripheralManager.stopAdvertising()
         
-        //Assigning the what its next role is
-        roleNext = "server"
-        
         //Sent the IP, go to the next view controller
-        performSegue(withIdentifier: "ToFileSharingViewController", sender: self)
+        performSegue(withIdentifier: "ToFileServerViewController", sender: self)
     }
     
 }

@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E0DFF8F205CD323008AEF78 /* FileSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0DFF8E205CD323008AEF78 /* FileSharingViewController.swift */; };
 		1E2BE04720213A7D00A8B6C7 /* guide-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */; };
 		1EB1E837201A390E00152D17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1E836201A390E00152D17 /* AppDelegate.swift */; };
 		1EB1E839201A390E00152D17 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1E838201A390E00152D17 /* MainViewController.swift */; };
 		1EB1E83C201A390E00152D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83A201A390E00152D17 /* Main.storyboard */; };
 		1EB1E83E201A390E00152D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83D201A390E00152D17 /* Assets.xcassets */; };
 		1EB1E841201A390E00152D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */; };
+		1EBDA470205D7B2500216881 /* FileServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBDA46F205D7B2500216881 /* FileServerViewController.swift */; };
+		1EBDA472205D7B3200216881 /* FileClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBDA471205D7B3200216881 /* FileClientViewController.swift */; };
 		1EC9B09B20258DE400522E4A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC9B09A20258DE400522E4A /* CoreBluetooth.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -33,7 +34,6 @@
 /* Begin PBXFileReference section */
 		1E0DFF8C205CC960008AEF78 /* bluetoothlab-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bluetoothlab-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E0DFF8D205CC961008AEF78 /* NSObject+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+test.h"; sourceTree = "<group>"; };
-		1E0DFF8E205CD323008AEF78 /* FileSharingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSharingViewController.swift; sourceTree = "<group>"; };
 		1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guide-logo.jpg"; sourceTree = "<group>"; };
 		1EB1E833201A390E00152D17 /* bluetoothlab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetoothlab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB1E836201A390E00152D17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +42,8 @@
 		1EB1E83D201A390E00152D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EB1E840201A390E00152D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1EB1E842201A390E00152D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EBDA46F205D7B2500216881 /* FileServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerViewController.swift; sourceTree = "<group>"; };
+		1EBDA471205D7B3200216881 /* FileClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileClientViewController.swift; sourceTree = "<group>"; };
 		1EC9B09A20258DE400522E4A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -80,13 +82,14 @@
 				1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */,
 				1EB1E836201A390E00152D17 /* AppDelegate.swift */,
 				1EB1E838201A390E00152D17 /* MainViewController.swift */,
+				1EBDA46F205D7B2500216881 /* FileServerViewController.swift */,
+				1EBDA471205D7B3200216881 /* FileClientViewController.swift */,
 				1EB1E83A201A390E00152D17 /* Main.storyboard */,
-				1EB1E83D201A390E00152D17 /* Assets.xcassets */,
 				1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */,
-				1EB1E842201A390E00152D17 /* Info.plist */,
 				1E0DFF8D205CC961008AEF78 /* NSObject+test.h */,
 				1E0DFF8C205CC960008AEF78 /* bluetoothlab-Bridging-Header.h */,
-				1E0DFF8E205CD323008AEF78 /* FileSharingViewController.swift */,
+				1EB1E842201A390E00152D17 /* Info.plist */,
+				1EB1E83D201A390E00152D17 /* Assets.xcassets */,
 			);
 			path = bluetoothlab;
 			sourceTree = "<group>";
@@ -177,9 +180,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E0DFF8F205CD323008AEF78 /* FileSharingViewController.swift in Sources */,
 				1EB1E839201A390E00152D17 /* MainViewController.swift in Sources */,
 				1EB1E837201A390E00152D17 /* AppDelegate.swift in Sources */,
+				1EBDA470205D7B2500216881 /* FileServerViewController.swift in Sources */,
+				1EBDA472205D7B3200216881 /* FileClientViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

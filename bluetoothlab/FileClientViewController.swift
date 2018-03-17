@@ -1,22 +1,21 @@
 //
-//  FileSharingViewController.swift
+//  FileClientViewController.swift
 //  bluetoothlab
 //
-//  Created by Don Chalanga Kuruppu on 3/16/18.
+//  Created by Don Chalanga Kuruppu on 3/17/18.
 //  Copyright © 2018 Don Chalanga Kuruppu. All rights reserved.
 //
 
 import UIKit
 
-class FileSharingViewController: UIViewController {
+class FileClientViewController: UIViewController {
     
-    var currentRole: String?
-
-    @IBOutlet weak var role: UILabel!
+    var peerID: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        role.text = currentRole
-        print(currentRole!)
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
