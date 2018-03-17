@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class MainViewController: UIViewController, UITextFieldDelegate {
+class MainViewController: UIViewController {
 
     //Storyboard attributes
     @IBOutlet weak var inputTextField: UITextField!       //As peripheral, the device would expose the string in this text field to be read as a characteristic
@@ -29,7 +29,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     var transferService: CBMutableService!
     
     //Bluetooth advertising and subscribing attributes
-    var advertisingString = "Hello there!"
     var dataToSend: Data!
     let transferServiceCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF26")
     let transferCharacteristicCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF25")
@@ -41,8 +40,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         connectionDetails.text = nil
 
         //Advertising text field initialization settings
-        inputTextField.text = advertisingString
-        inputTextField.delegate = self;
+        inputTextField.text = getWiFiAddress()!
         
         //Connect button initialization settings
         connectButton.isHidden = true
@@ -73,7 +71,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         transferService.characteristics = [transferCharacteristic]
         
         //Advertising string has to be converted to data before sending
-        dataToSend = advertisingString.data(using: String.Encoding.utf8)!
+        dataToSend = inputTextField.text!.data(using: String.Encoding.utf8)!
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,44 +112,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         freeifaddrs(ifaddr)
         
         return address
-    }
-    
-    //Allow only 20 characters in the input text field so as not to advertise a string longer than 20 characters
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var startString = ""
-        
-        if (textField.text != nil) {
-            startString += textField.text!
-        }
-        
-        startString += string
-        let limitNumber = startString.count
-        
-        if limitNumber > 20 {
-            return false
-        }
-        else {
-            return true
-        }
-    }
-    
-    //When the user has modified the advertising, record the change and notify any connected centrals about said change
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        advertisingString = inputTextField.text ?? " "
-        dataToSend = advertisingString.data(using: String.Encoding.utf8)
-        transferCharacteristic.value = dataToSend
-        peripheralManager.updateValue(dataToSend, for: transferCharacteristic, onSubscribedCentrals: nil)
-    }
-    
-    //Hide keyboard when the user touches outside keyboard
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    //Hide keyboard when the user presses return
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        inputTextField.resignFirstResponder();
-        return true
     }
     
     //Connect button tapped action handler
