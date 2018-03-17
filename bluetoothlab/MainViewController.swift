@@ -32,6 +32,8 @@ class MainViewController: UIViewController {
     var dataToSend: Data!
     let transferServiceCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF26")
     let transferCharacteristicCBUUID = CBUUID(string: "7E1DF8E3-AA0E-4F16-B9AB-43B28D73AF25")
+    
+    var roleNext: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +79,12 @@ class MainViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let FileSharingViewController = segue.destination as? FileSharingViewController {
+            FileSharingViewController.currentRole = roleNext
+        }
     }
     
     // Return IP address of WiFi interface (en0) as a String, or `nil`
@@ -166,19 +174,19 @@ extension MainViewController: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         discoveredPeripheral = peripheral
         discoveredPeripheral.delegate = self
-        centralManager.stopScan()     //Can stop scanning as a device is found
+        centralManager.stopScan()      //Can stop scanning as a device is found
         connectButton.isHidden = false //Since there is a peripheral to connect to, display connect button
     }
     
     //When the cental manager fails to create a connection with a peripheral, this gets triggered
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        connectButton.isHidden = true                                        //Failed to get connected to the chosen peripheral, therefore hide it
+        connectButton.isHidden = true                                              //Failed to get connected to the chosen peripheral, therefore hide it
         centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])   //Since the attempted connection failed try again
     }
     
     //When an existing connection to a peripheral is broken, this gets triggered
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        disconnectButton.isHidden = true                                          //No need to display the disconnect button anymore as there is nothing to be disconnected from
+        disconnectButton.isHidden = true                                         //No need to display the disconnect button anymore as there is nothing to be disconnected from
         connectionDetails.text = nil                                             //Clear the connection details as there is no active connections
         receivedTextField.text = ""                                              //Since nothing is being received, clear what has already been received
         centralManager.scanForPeripherals(withServices: [transferServiceCBUUID])
@@ -187,8 +195,8 @@ extension MainViewController: CBCentralManagerDelegate {
     //When a connection with a peripheral is established, this gets triggered
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         connectionDetails.text = "Connected to " + peripheral.name!
-        successful = true                    //Let the connection timeout method know the connection was successful
-        connectButton.isHidden = true          //Since there is a peripheral that the app is connected to, hide it
+        successful = true                       //Let the connection timeout method know the connection was successful
+        connectButton.isHidden = true           //Since there is a peripheral that the app is connected to, hide it
         disconnectButton.isHidden = false       //Since there is a connection to disconnect, make it appear
         discoveredPeripheral.discoverServices([transferServiceCBUUID])
     }
@@ -213,7 +221,6 @@ extension MainViewController: CBPeripheralDelegate {
         guard let characteristics = service.characteristics else { return }
         
         for characteristic in characteristics {
-            discoveredPeripheral.setNotifyValue(true, for: characteristic)   //Subscribe to the characteristic so that updates are received when the peripheral changes the characteristic
             discoveredPeripheral.readValue(for: characteristic)            //Try to read the value of the characteristic from the peripheral
         }
     }
@@ -224,11 +231,12 @@ extension MainViewController: CBPeripheralDelegate {
             return
         }
         receivedTextField.text = stringFromData as String
-    }
-    
-    //When the peripheral let you know the characteristic has been updated, read the characteristic again
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
-        discoveredPeripheral.readValue(for: characteristic)
+        
+        //Assigning the what its next role is
+        roleNext = "client"
+        
+        //Got the IP, go to the next view controller
+        performSegue(withIdentifier: "ToFileSharingViewController", sender: self)
     }
 }
 
@@ -260,16 +268,13 @@ extension MainViewController: CBPeripheralManagerDelegate {
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
         request.value = dataToSend!
         peripheralManager.respond(to: request, withResult: .success)
-    }
-    
-    //This gets called when a central subscribes to receive update notifications of peripherals characteristics
-    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        peripheralManager.stopAdvertising()     //Stop the scanning as there is a central connected currently
-    }
-    
-    //This gets called when a connected central unsubscribes a periphera's characteristic
-    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
-        peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [transferServiceCBUUID]])      //Central was disconnected. Start scannng again
+        peripheralManager.stopAdvertising()
+        
+        //Assigning the what its next role is
+        roleNext = "server"
+        
+        //Sent the IP, go to the next view controller
+        performSegue(withIdentifier: "ToFileSharingViewController", sender: self)
     }
     
 }

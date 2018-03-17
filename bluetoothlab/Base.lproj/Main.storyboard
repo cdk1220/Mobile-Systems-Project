@@ -131,11 +131,39 @@
                         <outlet property="disconnectButton" destination="Ciw-Tc-N3m" id="qVc-GW-LQw"/>
                         <outlet property="inputTextField" destination="Mtm-7q-WJ4" id="wPR-69-GRz"/>
                         <outlet property="receivedTextField" destination="BUa-KE-2gq" id="epV-AW-lqc"/>
+                        <segue destination="t6g-jv-rIy" kind="show" identifier="ToFileSharingViewController" id="pvA-kv-OFw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-304.80000000000001" y="271.21439280359823"/>
+        </scene>
+        <!--File Sharing View Controller-->
+        <scene sceneID="9jv-EW-v2p">
+            <objects>
+                <viewController id="t6g-jv-rIy" customClass="FileSharingViewController" customModule="bluetoothlab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RBV-kR-Qod">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfC-jR-lpm">
+                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="0oX-UM-l7E"/>
+                    </view>
+                    <connections>
+                        <outlet property="role" destination="cfC-jR-lpm" id="K6l-eK-QrG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2WL-Mt-pR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="679" y="271"/>
         </scene>
     </scenes>
 </document>
