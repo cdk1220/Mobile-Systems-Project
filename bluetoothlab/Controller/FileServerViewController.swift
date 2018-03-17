@@ -10,28 +10,26 @@ import UIKit
 
 class FileServerViewController: UIViewController {
     
+    //Storyboard attributes
+    @IBOutlet weak var fileList: UITableView!
+    @IBOutlet weak var createFileButton: UIButton!
+    @IBOutlet weak var deleteFileButton: UIButton!
+    
     var peerID: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //Create file button setup
+        createFileButton.layer.cornerRadius = 10
+        
+        //Delete file button setup
+        deleteFileButton.layer.cornerRadius = 10
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

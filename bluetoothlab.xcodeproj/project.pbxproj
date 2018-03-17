@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1E2BE04720213A7D00A8B6C7 /* guide-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */; };
+		1E7FDAD7205D949100ABC9D4 /* ServerFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7FDAD6205D949100ABC9D4 /* ServerFileEntry.swift */; };
+		1E7FDAD9205D94B100ABC9D4 /* ClientFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7FDAD8205D94B100ABC9D4 /* ClientFileEntry.swift */; };
 		1EB1E837201A390E00152D17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1E836201A390E00152D17 /* AppDelegate.swift */; };
 		1EB1E839201A390E00152D17 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1E838201A390E00152D17 /* MainViewController.swift */; };
 		1EB1E83C201A390E00152D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83A201A390E00152D17 /* Main.storyboard */; };
@@ -35,6 +37,8 @@
 		1E0DFF8C205CC960008AEF78 /* bluetoothlab-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bluetoothlab-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E0DFF8D205CC961008AEF78 /* NSObject+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+test.h"; sourceTree = "<group>"; };
 		1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guide-logo.jpg"; sourceTree = "<group>"; };
+		1E7FDAD6205D949100ABC9D4 /* ServerFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFileEntry.swift; sourceTree = "<group>"; };
+		1E7FDAD8205D94B100ABC9D4 /* ClientFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientFileEntry.swift; sourceTree = "<group>"; };
 		1EB1E833201A390E00152D17 /* bluetoothlab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetoothlab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB1E836201A390E00152D17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EB1E838201A390E00152D17 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +63,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E7FDAD2205D92F000ABC9D4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1EB1E838201A390E00152D17 /* MainViewController.swift */,
+				1EBDA46F205D7B2500216881 /* FileServerViewController.swift */,
+				1EBDA471205D7B3200216881 /* FileClientViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1E7FDAD3205D930900ABC9D4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1E7FDAD5205D931D00ABC9D4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1E7FDAD6205D949100ABC9D4 /* ServerFileEntry.swift */,
+				1E7FDAD8205D94B100ABC9D4 /* ClientFileEntry.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1EB1E82A201A390E00152D17 = {
 			isa = PBXGroup;
 			children = (
@@ -79,11 +109,11 @@
 		1EB1E835201A390E00152D17 /* bluetoothlab */ = {
 			isa = PBXGroup;
 			children = (
+				1E7FDAD3205D930900ABC9D4 /* Model */,
+				1E7FDAD5205D931D00ABC9D4 /* View */,
+				1E7FDAD2205D92F000ABC9D4 /* Controller */,
 				1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */,
 				1EB1E836201A390E00152D17 /* AppDelegate.swift */,
-				1EB1E838201A390E00152D17 /* MainViewController.swift */,
-				1EBDA46F205D7B2500216881 /* FileServerViewController.swift */,
-				1EBDA471205D7B3200216881 /* FileClientViewController.swift */,
 				1EB1E83A201A390E00152D17 /* Main.storyboard */,
 				1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */,
 				1E0DFF8D205CC961008AEF78 /* NSObject+test.h */,
@@ -180,8 +210,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7FDAD7205D949100ABC9D4 /* ServerFileEntry.swift in Sources */,
 				1EB1E839201A390E00152D17 /* MainViewController.swift in Sources */,
 				1EB1E837201A390E00152D17 /* AppDelegate.swift in Sources */,
+				1E7FDAD9205D94B100ABC9D4 /* ClientFileEntry.swift in Sources */,
 				1EBDA470205D7B2500216881 /* FileServerViewController.swift in Sources */,
 				1EBDA472205D7B3200216881 /* FileClientViewController.swift in Sources */,
 			);
