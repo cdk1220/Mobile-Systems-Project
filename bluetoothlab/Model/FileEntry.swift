@@ -11,4 +11,9 @@ import Foundation
 struct File {
     public var name: String
     public var availability: String
+    
+    init(name: String, availability: String) {
+        self.name = name
+        self.availability = availability
+    }
 }
