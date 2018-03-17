@@ -9,7 +9,7 @@
 import UIKit
 
 class FileClientViewController: UIViewController {
-    
+
     //Storyboard attributes
     @IBOutlet weak var fileList: UITableView!
     @IBOutlet weak var requestFileListButton: UIButton!
@@ -30,12 +30,11 @@ class FileClientViewController: UIViewController {
         //Delete file button setup
         deleteFileButton.layer.cornerRadius = 10
         
+        
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
 
 
 }

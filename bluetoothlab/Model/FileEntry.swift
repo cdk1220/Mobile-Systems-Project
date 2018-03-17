@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct File {
+struct FileEntry {
     public var name: String
     public var availability: String
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileServerViewController: UIViewController {
+class FileServerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //Storyboard attributes
     @IBOutlet weak var fileList: UITableView!
@@ -25,11 +25,26 @@ class FileServerViewController: UIViewController {
         
         //Delete file button setup
         deleteFileButton.layer.cornerRadius = 10
+        
+        fileList.dataSource = self
+        fileList.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //Number of rows in the table
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ServerServices.serverServicesInstance.getFiles().count
     }
-
+    
+    //Populating the table
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = fileList.dequeueReusableCell(withIdentifier: "ServerFileEntry") as? ServerFileEntry {
+            let serverFileEntry = ServerServices.serverServicesInstance.getFiles()[indexPath.row]
+            cell.updateView(fileEntry: serverFileEntry)
+            
+            return cell
+        }
+        else {
+            return ServerFileEntry()
+        }
+    }
 }
