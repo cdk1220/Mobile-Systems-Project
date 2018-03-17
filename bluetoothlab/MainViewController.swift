@@ -12,8 +12,8 @@ import CoreBluetooth
 class MainViewController: UIViewController, UITextFieldDelegate {
 
     //Storyboard attributes
-    @IBOutlet weak var inputTextField: UITextField!        //As peripheral, the device would expose the string in this text field to be read as a characteristic
-    @IBOutlet weak var receivedTextField: UITextField!     //As central, the device would populate this text field upon reading a peripheral's characteristic
+    @IBOutlet weak var inputTextField: UITextField!       //As peripheral, the device would expose the string in this text field to be read as a characteristic
+    @IBOutlet weak var receivedTextField: UITextField!    //As central, the device would populate this text field upon reading a peripheral's characteristic
     @IBOutlet weak var connectButton: UIButton!           //As central, the device would enable the user to connect to a peripheral that has been found by tapping this
     @IBOutlet weak var disconnectButton: UIButton!        //As central, the device would enable the user to cancel a connection with a peripheral by tapping thus
     @IBOutlet weak var connectionDetails: UILabel!        //As central, the device would display the name of the peripheral that it is connected to in this label
@@ -21,7 +21,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     //Bluetooth central role attributes
     var centralManager: CBCentralManager!
     var discoveredPeripheral: CBPeripheral!
-    var successful: Bool!                        //Used to implement a connection timeout method for the central
+    var successful: Bool!                                 //Used to implement a connection timeout method for the central
     
     //Bluetooth peripheral role attributes
     var peripheralManager: CBPeripheralManager!
@@ -79,6 +79,41 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Return IP address of WiFi interface (en0) as a String, or `nil`
+    func getWiFiAddress() -> String? {
+        var address : String?
+        
+        // Get list of all interfaces on the local machine:
+        var ifaddr : UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddr) == 0 else { return nil }
+        guard let firstAddr = ifaddr else { return nil }
+        
+        // For each interface ...
+        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+            let interface = ifptr.pointee
+            
+            // Check for IPv4 or IPv6 interface:
+            let addrFamily = interface.ifa_addr.pointee.sa_family
+            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
+                
+                // Check interface name:
+                let name = String(cString: interface.ifa_name)
+                if  name == "en0" {
+                    
+                    // Convert interface address to a human readable string:
+                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
+                                &hostname, socklen_t(hostname.count),
+                                nil, socklen_t(0), NI_NUMERICHOST)
+                    address = String(cString: hostname)
+                }
+            }
+        }
+        freeifaddrs(ifaddr)
+        
+        return address
     }
     
     //Allow only 20 characters in the input text field so as not to advertise a string longer than 20 characters

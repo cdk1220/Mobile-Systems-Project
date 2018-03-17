@@ -30,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E0DFF8C205CC960008AEF78 /* bluetoothlab-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bluetoothlab-Bridging-Header.h"; sourceTree = "<group>"; };
+		1E0DFF8D205CC961008AEF78 /* NSObject+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+test.h"; sourceTree = "<group>"; };
 		1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guide-logo.jpg"; sourceTree = "<group>"; };
 		1EB1E833201A390E00152D17 /* bluetoothlab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetoothlab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB1E836201A390E00152D17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,8 @@
 				1EB1E83D201A390E00152D17 /* Assets.xcassets */,
 				1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */,
 				1EB1E842201A390E00152D17 /* Info.plist */,
+				1E0DFF8D205CC961008AEF78 /* NSObject+test.h */,
+				1E0DFF8C205CC960008AEF78 /* bluetoothlab-Bridging-Header.h */,
 			);
 			path = bluetoothlab;
 			sourceTree = "<group>";
@@ -125,6 +129,7 @@
 				TargetAttributes = {
 					1EB1E832201A390E00152D17 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -304,12 +309,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EP4K2BVKV2;
 				INFOPLIST_FILE = bluetoothlab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.don.bluetoothlab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "bluetoothlab/bluetoothlab-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -319,12 +327,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EP4K2BVKV2;
 				INFOPLIST_FILE = bluetoothlab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.don.bluetoothlab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "bluetoothlab/bluetoothlab-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
