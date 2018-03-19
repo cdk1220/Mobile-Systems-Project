@@ -54,7 +54,7 @@ class ServerServices {
     //This function handles creating new files
     func createAFile() {
         let path = docPathString + "/file" + String(fileNumber) + ".txt"                   //Path to file
-        let data = ("This file is file number" + String(fileNumber)).data(using: .utf8)    //Data that goes into the file
+        let data = ("This file is file number " + String(fileNumber)).data(using: .utf8)    //Data that goes into the file
         
         let result = fileManager.createFile(atPath: path, contents: data, attributes: nil) //Create file
         

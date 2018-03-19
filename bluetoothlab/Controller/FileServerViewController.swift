@@ -14,6 +14,12 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var fileList: UITableView!
     @IBOutlet weak var createFileButton: UIButton!
     @IBOutlet weak var deleteFileButton: UIButton!
+    @IBOutlet weak var openFileButton: UIButton!
+    
+    
+    
+    //To handle opening files
+    var docController:UIDocumentInteractionController!
     
     var peerID: String!
     
@@ -28,6 +34,9 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
         
         //Delete file button setup
         deleteFileButton.layer.cornerRadius = 10
+        
+        //Open file button setup
+        openFileButton.layer.cornerRadius = 10
         
         //Preparing table view
         fileList.dataSource = self
@@ -77,5 +86,26 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
+    
+    //Open button action handler
+    @IBAction func openButtonPressed(_ sender: Any) {
+        let index = fileList.indexPathForSelectedRow
+        
+        //Delete if only something is selected
+        if index != nil {
+            let currentCell = fileList.cellForRow(at: index!)! as! ServerFileEntry
+            
+            var i = 0
+            for file in ServerServices.serverServicesInstance.getFiles() {
+                if currentCell.fileName.text == file.name {
+                    docController = UIDocumentInteractionController(url: ServerServices.serverServicesInstance.stringToUrl(stringPath: file.stringPath))
+                    docController.presentOptionsMenu(from: self.openFileButton.frame, in: self.view, animated: true)
+                    break
+                }
+                i = i + 1
+            }
+        }
+    }
+    
     
 }

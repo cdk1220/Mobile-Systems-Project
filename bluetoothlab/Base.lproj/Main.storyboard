@@ -226,6 +226,22 @@
                                     <action selector="disconnectTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Qh-NW-ksh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sng-ps-Pin">
+                                <rect key="frame" x="109" y="598" width="157" height="49"/>
+                                <color key="backgroundColor" red="0.019890418279999999" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="Key-qT-1CY"/>
+                                    <constraint firstAttribute="width" constant="157" id="bJW-Mf-7BE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <color key="tintColor" red="0.96806353329999995" green="0.50867295270000001" blue="0.049708269540000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Open">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="openButtonPressed:" destination="K9k-hO-2c3" eventType="touchUpInside" id="vUV-9k-6Kj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -234,6 +250,8 @@
                             <constraint firstItem="GNK-6l-DkR" firstAttribute="top" secondItem="0Ml-Yn-pOG" secondAttribute="bottom" constant="9" id="AJx-Nc-SNd"/>
                             <constraint firstItem="zB3-ym-4T9" firstAttribute="top" secondItem="GNK-6l-DkR" secondAttribute="bottom" constant="34" id="P4N-9P-dli"/>
                             <constraint firstItem="uEZ-Gd-heX" firstAttribute="top" secondItem="GNK-6l-DkR" secondAttribute="bottom" constant="34" id="TPF-J0-Hx2"/>
+                            <constraint firstItem="Sng-ps-Pin" firstAttribute="top" secondItem="uEZ-Gd-heX" secondAttribute="bottom" constant="15" id="d9Z-Hj-fb4"/>
+                            <constraint firstItem="Sng-ps-Pin" firstAttribute="centerX" secondItem="GNK-6l-DkR" secondAttribute="centerX" id="f96-bz-eMf"/>
                             <constraint firstItem="uEZ-Gd-heX" firstAttribute="leading" secondItem="nQr-73-Yfm" secondAttribute="leading" constant="16" id="mhi-Vw-0n3"/>
                             <constraint firstItem="0Ml-Yn-pOG" firstAttribute="top" secondItem="nQr-73-Yfm" secondAttribute="top" id="sSI-qJ-8DD"/>
                             <constraint firstItem="0Ml-Yn-pOG" firstAttribute="centerX" secondItem="yyG-aA-p8g" secondAttribute="centerX" id="xXx-9h-YY6"/>
@@ -245,6 +263,7 @@
                         <outlet property="createFileButton" destination="uEZ-Gd-heX" id="NXr-mq-jWt"/>
                         <outlet property="deleteFileButton" destination="zB3-ym-4T9" id="Xtl-yf-2Ix"/>
                         <outlet property="fileList" destination="GNK-6l-DkR" id="nHO-xp-ewk"/>
+                        <outlet property="openFileButton" destination="Sng-ps-Pin" id="mlC-1u-Cvw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EyB-G8-kDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
