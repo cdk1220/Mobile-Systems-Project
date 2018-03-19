@@ -20,12 +20,16 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Prepare server services
+        ServerServices.serverServicesInstance.prepare()
+        
         //Create file button setup
         createFileButton.layer.cornerRadius = 10
         
         //Delete file button setup
         deleteFileButton.layer.cornerRadius = 10
         
+        //Preparing table view
         fileList.dataSource = self
         fileList.delegate = self
     }
@@ -47,4 +51,11 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
             return ServerFileEntry()
         }
     }
+    
+    //Create button action handler
+    @IBAction func createButtonPressed(_ sender: Any) {
+        ServerServices.serverServicesInstance.createAFile()
+        fileList.reloadData()
+    }
+    
 }
