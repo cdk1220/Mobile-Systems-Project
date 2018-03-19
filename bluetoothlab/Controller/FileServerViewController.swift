@@ -58,4 +58,24 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
         fileList.reloadData()
     }
     
+    //Delete button action handler
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        let index = fileList.indexPathForSelectedRow
+        
+        //Delete if only something is selected
+        if index != nil {
+            let currentCell = fileList.cellForRow(at: index!)! as! ServerFileEntry
+            
+            var i = 0
+            for file in ServerServices.serverServicesInstance.getFiles() {
+                if currentCell.fileName.text == file.name {
+                    ServerServices.serverServicesInstance.deleteFile(path: file.stringPath)
+                    fileList.reloadData()
+                    break
+                }
+                i = i + 1
+            }
+        }
+    }
+    
 }

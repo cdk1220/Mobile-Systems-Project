@@ -67,7 +67,7 @@ class ServerServices {
             availableFiles.append(newFile)
         }
         else {
-            print("File creation unsuccessful")
+            print("File creation unsuccessful\n")
         }
         
         fileNumber = fileNumber + 1
@@ -83,6 +83,8 @@ class ServerServices {
             for file in availableFiles {
                 if file.stringPath == path {
                     availableFiles.remove(at: i)
+                    print("File deletion successful\n")
+                    break
                 }
                 
                 i = i + 1
