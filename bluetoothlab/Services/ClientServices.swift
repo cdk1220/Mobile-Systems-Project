@@ -1,17 +1,17 @@
 //
-//  ServerServices.swift
+//  ClientServices.swift
 //  bluetoothlab
 //
-//  Created by Don Chalanga Kuruppu on 3/17/18.
+//  Created by Don Chalanga Kuruppu on 3/19/18.
 //  Copyright © 2018 Don Chalanga Kuruppu. All rights reserved.
 //
 
 import Foundation
 
-class ServerServices {
+class ClientServices {
     
     //Singleton
-    static let serverServicesInstance = ServerServices()
+    static let clientServicesInstance = ClientServices()
     
     //List of files available to share
     private var availableFiles = [FileEntry]()

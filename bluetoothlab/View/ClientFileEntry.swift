@@ -14,15 +14,8 @@ class ClientFileEntry: UITableViewCell {
     @IBOutlet weak var fileName: UILabel!
     @IBOutlet weak var availability: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func updateView(fileEntry: FileEntry) {
+        fileName.text = fileEntry.name
+        availability.text = fileEntry.availability
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
