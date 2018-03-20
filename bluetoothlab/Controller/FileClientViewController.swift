@@ -120,8 +120,14 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     
    
     @IBAction func requestListButtonPressed(_ sender: Any) {
-        
+        //Get file list from server
+        //Make obejcts with remote availability
+        //Reload the table
     }
     @IBAction func downloadButtonPressed(_ sender: Any) {
+        //Request file content
+        //Create file and save it
+        //Edit the list
+        //Reload the table
     }
 }

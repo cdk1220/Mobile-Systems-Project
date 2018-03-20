@@ -25,9 +25,6 @@ class ClientServices {
     //String path to documents
     private var docPathString: String!
     
-    //This is used when generating a new file. The name of the new file and the content inside this depend on this value
-    private var fileNumber: Int = 1
-    
     //This function prepares and initializes variables before using the services offered by the class
     func prepare() {
         //Getting the URL to documents
@@ -36,41 +33,35 @@ class ClientServices {
         //Returns string path to documents
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         docPathString = paths[0]
-        
-        //Create 3 files as examples and store them
-        for i in 1...3 {
-            createAFile()
-        }
-        
-        //ls
-        do {
-            try print(fileManager.contentsOfDirectory(atPath: docPathString))
-            print(availableFiles)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
     }
     
     //This function handles creating new files
-    func createAFile() {
-        let path = docPathString + "/file" + String(fileNumber) + ".txt"                    //Path to file
-        let data = ("This file is file number " + String(fileNumber)).data(using: .utf8)    //Data that goes into the file
-        
-        let result = fileManager.createFile(atPath: path, contents: data, attributes: nil)  //Create file
+    func createAFile(fileName: String, content: Data) {
+        let path = docPathString + fileName + ".txt"                                           //Path to file
+        let result = fileManager.createFile(atPath: path, contents: content, attributes: nil)  //Create file
         
         //Show results
         if result {
             print("File creation successful\n")
             
-            //Model the file created and add to available list
-            let newFile = FileEntry(name: "file" + String(fileNumber), availability: "n/a", stringPath: path)
-            availableFiles.append(newFile)
+            //Entry was created when the directory structure was received. Edit it now.
+            var i: Int
+            for i in 0...availableFiles.count {
+                if availableFiles[i].name  == fileName {
+                    availableFiles[i].availability = "local"
+                    availableFiles[i].stringPath = path
+                }
+            }
+            
         }
         else {
             print("File creation unsuccessful\n")
         }
+    }
+    
+    //This function handles creating file entries upon receiving directory content from the server
+    func createFileEntries() {
         
-        fileNumber = fileNumber + 1
     }
     
     //This function handles deleting files
