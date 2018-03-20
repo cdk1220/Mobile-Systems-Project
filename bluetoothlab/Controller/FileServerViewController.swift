@@ -91,7 +91,7 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     @IBAction func openButtonPressed(_ sender: Any) {
         let index = fileList.indexPathForSelectedRow
         
-        //Delete if only something is selected
+        //Open if only something is selected
         if index != nil {
             let currentCell = fileList.cellForRow(at: index!)! as! ServerFileEntry
             

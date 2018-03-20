@@ -343,7 +343,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="disconnectTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2PC-vz-QIZ"/>
+                                    <action selector="openButtonPressed:" destination="3Ec-CQ-eQP" eventType="touchUpInside" id="M6d-mW-OVa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaG-TK-nwe">

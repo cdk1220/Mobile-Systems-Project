@@ -61,6 +61,34 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
             return ClientFileEntry()
         }
     }
+    
+    //Open button action handler
+    @IBAction func openButtonPressed(_ sender: Any) {
+        let index = fileList.indexPathForSelectedRow
+        
+        //Delete if only something is selected
+        if index != nil {
+            let currentCell = fileList.cellForRow(at: index!)! as! ClientFileEntry
+            
+            //Check if the file is available locally, before opening it
+            if currentCell.availability.text == "local" {
+                var i = 0
+                for file in ClientServices.clientServicesInstance.getFiles() {
+                    if currentCell.fileName.text == file.name {
+                        docController = UIDocumentInteractionController(url: ClientServices.clientServicesInstance.stringToUrl(stringPath: file.stringPath))
+                        docController.presentOptionsMenu(from: self.openFileButton.frame, in: self.view, animated: true)
+                        break
+                    }
+                    i = i + 1
+                }
+            }
+            else {
+                let alert = UIAlertController(title: "Alert", message: "Download file first!", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
 
 
 }
