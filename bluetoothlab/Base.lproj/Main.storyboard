@@ -331,6 +331,7 @@
                                 </state>
                                 <connections>
                                     <action selector="connectTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HuC-mC-Z7y"/>
+                                    <action selector="requestListButtonPressed:" destination="3Ec-CQ-eQP" eventType="touchUpInside" id="BO0-vk-9Sg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTp-vf-5Ze">
@@ -356,6 +357,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
+                                    <action selector="deleteButtonPressed:" destination="3Ec-CQ-eQP" eventType="touchUpInside" id="Qpv-GU-R22"/>
                                     <action selector="disconnectTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RGp-jD-DfW"/>
                                 </connections>
                             </button>
@@ -370,6 +372,7 @@
                                 </state>
                                 <connections>
                                     <action selector="connectTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oPc-Vv-FHN"/>
+                                    <action selector="downloadButtonPressed:" destination="3Ec-CQ-eQP" eventType="touchUpInside" id="LW7-tO-VY3"/>
                                 </connections>
                             </button>
                         </subviews>

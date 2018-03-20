@@ -66,7 +66,7 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     @IBAction func openButtonPressed(_ sender: Any) {
         let index = fileList.indexPathForSelectedRow
         
-        //Delete if only something is selected
+        //Open if only something is selected
         if index != nil {
             let currentCell = fileList.cellForRow(at: index!)! as! ClientFileEntry
             
@@ -90,5 +90,38 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
 
-
+    //Delete button action handler
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        let index = fileList.indexPathForSelectedRow
+        
+        //Delete if only something is selected
+        if index != nil {
+            let currentCell = fileList.cellForRow(at: index!)! as! ClientFileEntry
+            
+            //Deleting only what's local
+            if currentCell.availability.text == "local" {
+                var i = 0
+                for file in ClientServices.clientServicesInstance.getFiles() {
+                    if currentCell.fileName.text == file.name {
+                        ClientServices.clientServicesInstance.deleteFile(path: file.stringPath)
+                        fileList.reloadData()
+                        break
+                    }
+                    i = i + 1
+                }
+            }
+            else {
+                let alert = UIAlertController(title: "Alert", message: "Download file first!", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+   
+    @IBAction func requestListButtonPressed(_ sender: Any) {
+        
+    }
+    @IBAction func downloadButtonPressed(_ sender: Any) {
+    }
 }
