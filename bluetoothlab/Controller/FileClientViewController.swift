@@ -47,6 +47,15 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
         //Preparing table view
         fileList.dataSource = self
         fileList.delegate = self
+        
+        //Preparing for communication
+        self.peerID = MCPeerID(displayName: UIDevice.current.name)
+        self.session = MCSession(peer: peerID)
+        self.session.delegate = self
+        self.browser = MCBrowserViewController(serviceType: serviceID, session:self.session)
+        self.browser.delegate = self;
+        
+       
     }
 
     //Number of rows in the table
@@ -123,12 +132,26 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-   
+    //Action handler for request list is pressed
     @IBAction func requestListButtonPressed(_ sender: Any) {
-        //Get file list from server
-        //Make obejcts with remote availability
-        //Reload the table
+        
+        //Not connected to server, present browser view controller
+        if self.session.connectedPeers.count == 0 {
+            self.present(self.browser, animated: true, completion: nil)
+        }
+        else {
+            
+            //Send server a message asking for directory content
+            let message = "Directory".data(using: .utf8)
+            do {
+                try self.session.send(message!, toPeers: self.session.connectedPeers, with: MCSessionSendDataMode.reliable)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
     }
+    
+    //Action handler for download file is pressed
     @IBAction func downloadButtonPressed(_ sender: Any) {
         //Request file content
         //Create file and save it
@@ -143,7 +166,7 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     
     //When server sends data, this gets called
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        //Directory structure will be received in here
+        print(String.init(data: data, encoding: String.Encoding.utf8)!)
     }
     
     //Gets called when server opens a stream
@@ -164,11 +187,33 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     //Gets called when you press done in browser view controller
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         
+        //Check if the user is connected again, if not present the browser view controller again
+        if self.session.connectedPeers.count == 0 {
+            self.dismiss(animated: true, completion: nil)
+            self.present(self.browser, animated: true, completion: nil)
+        }
+        else {
+            self.dismiss(animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert", message: "Connection successful!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     //Gets called when you press cancel in browser view controller
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         
+        //Check if the user is connected again, if not present the browser view controller again
+        if self.session.connectedPeers.count == 0 {
+            self.dismiss(animated: true, completion: nil)
+            self.present(self.browser, animated: true, completion: nil)
+        }
+        else {
+            self.dismiss(animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert", message: "Connection successful!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
 }

@@ -23,11 +23,13 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     //Variables used for communication
     var assistant : MCAdvertiserAssistant!      //Used to advertise the service you have
     var session : MCSession!                    //Creates a session for communication
-    var serviceID: String!                      //The uuid of the service you are creating
+    var serviceID: String = ""                  //The uuid of the service you are creating
     var peerID: MCPeerID!                       //Your device ID
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(serviceID)
         
         //Prepare server services
         ServerServices.serverServicesInstance.prepare()
@@ -49,7 +51,7 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
         self.peerID = MCPeerID(displayName: UIDevice.current.name)
         self.session = MCSession(peer: peerID)
         self.session.delegate = self
-        self.assistant = MCAdvertiserAssistant(serviceType: serviceID, discoveryInfo:nil, session:self.session)
+        self.assistant = MCAdvertiserAssistant(serviceType: serviceID, discoveryInfo: nil, session: self.session)
         self.assistant.start()
     }
 
@@ -124,7 +126,9 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     
     //When client requests in the form of data get received, this gets called
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        // Look for the file name to be sent or to send directory content
+        
+        let stringReceived = String.init(data: data, encoding: String.Encoding.utf8)
+        print(stringReceived)
     }
     
     //Gets called when client streams are received
