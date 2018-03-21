@@ -83,10 +83,10 @@ class MainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let FileServerViewController = segue.destination as? FileServerViewController {
-            FileServerViewController.peerID = inputTextField.text!
+            FileServerViewController.serviceID = inputTextField.text!
         }
         else if let FileClientViewController = segue.destination as? FileClientViewController {
-            FileClientViewController.peerID = receivedTextField.text!
+            FileClientViewController.serviceID = receivedTextField.text!
         }
     }
     

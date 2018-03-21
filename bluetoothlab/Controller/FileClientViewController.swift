@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
-class FileClientViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FileClientViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
 
     //Storyboard attributes
     @IBOutlet weak var fileList: UITableView!
@@ -18,9 +19,13 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var deleteFileButton: UIButton!
     
     //To handle opening files
-    var docController:UIDocumentInteractionController!
+    var docController: UIDocumentInteractionController!
     
-    var peerID: String!
+    //Variables used for communication
+    var session : MCSession!                    //Creates a session for communication
+    var serviceID: String!                      //The uuid of the service you are listening to
+    var peerID: MCPeerID!                       //Your device ID
+    var browser : MCBrowserViewController!      //Used to search for the service you want to listen to
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,4 +135,40 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
         //Edit the list
         //Reload the table
     }
+    
+    //Gets executed when the connection with server gets dropped
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+    }
+    
+    //When server sends data, this gets called
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        //Directory structure will be received in here
+    }
+    
+    //Gets called when server opens a stream
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    //WHen server starts sending a file this gets called
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    //WHen server is done sending the file this gets called
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        //Downloaded file will be received here. Use the given URL to grab file
+    }
+    
+    //Gets called when you press done in browser view controller
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
+    //Gets called when you press cancel in browser view controller
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
 }

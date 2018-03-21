@@ -7,21 +7,24 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
-class FileServerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+class FileServerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MCSessionDelegate {
+ 
     //Storyboard attributes
     @IBOutlet weak var fileList: UITableView!
     @IBOutlet weak var createFileButton: UIButton!
     @IBOutlet weak var deleteFileButton: UIButton!
     @IBOutlet weak var openFileButton: UIButton!
     
-    
-    
     //To handle opening files
-    var docController:UIDocumentInteractionController!
+    var docController: UIDocumentInteractionController!
     
-    var peerID: String!
+    //Variables used for communication
+    var assistant : MCAdvertiserAssistant!      //Used to advertise the service you have
+    var session : MCSession!                    //Creates a session for communication
+    var serviceID: String!                      //The uuid of the service you are creating
+    var peerID: MCPeerID!                       //Your device ID
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,13 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
         //Preparing table view
         fileList.dataSource = self
         fileList.delegate = self
+        
+        //Preparing for communication
+        self.peerID = MCPeerID(displayName: UIDevice.current.name)
+        self.session = MCSession(peer: peerID)
+        self.session.delegate = self
+        self.assistant = MCAdvertiserAssistant(serviceType: serviceID, discoveryInfo:nil, session:self.session)
+        self.assistant.start()
     }
 
     //Number of rows in the table
@@ -107,5 +117,28 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    //Gets executed when the connection with a client gets dropped
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+    }
     
+    //When client requests in the form of data get received, this gets called
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        // Look for the file name to be sent or to send directory content
+    }
+    
+    //Gets called when client streams are received
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    //If a client starts sending a file (won't happen, just there because of being session delegate) this gets executed
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    //WHen a client finished sending a file (won't happen, just there because of being session delegate) this gets executed
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
+    }
 }
