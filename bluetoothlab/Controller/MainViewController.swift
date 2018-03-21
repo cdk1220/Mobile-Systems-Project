@@ -82,11 +82,12 @@ class MainViewController: UIViewController {
     //Check for the destination controller and pass the right IP address
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        //Make sure to conform to the service type name rules
         if let FileServerViewController = segue.destination as? FileServerViewController {
-            FileServerViewController.serviceID = inputTextField.text!
+            FileServerViewController.serviceID = inputTextField.text!.replacingOccurrences(of: ".", with: "-") + "a"
         }
         else if let FileClientViewController = segue.destination as? FileClientViewController {
-            FileClientViewController.serviceID = receivedTextField.text!
+            FileClientViewController.serviceID = receivedTextField.text!.replacingOccurrences(of: ".", with: "-") + "a"
         }
     }
     
