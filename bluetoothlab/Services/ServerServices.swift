@@ -37,17 +37,27 @@ class ServerServices {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         docPathString = paths[0]
         
+        //Delete everything before starting the service
+        do {
+            let contents = try fileManager.contentsOfDirectory(atPath: docPathString)
+            
+            //Clear everything in the docs directory
+            for file in contents {
+                do {
+                    try fileManager.removeItem(atPath: docPathString + "/" + file)
+                    print("Delete successful")
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
         //Create 3 files as examples and store them
         for i in 1...3 {
             createAFile()
-        }
-        
-        //ls
-        do {
-            try print(fileManager.contentsOfDirectory(atPath: docPathString))
-            print(availableFiles)
-        } catch let error as NSError {
-            print(error.localizedDescription)
         }
     }
     

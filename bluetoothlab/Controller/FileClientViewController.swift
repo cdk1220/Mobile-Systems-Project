@@ -220,7 +220,12 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     
     //WHen server is done sending the file this gets called
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        //Downloaded file will be received here. Use the given URL to grab file
+        ClientServices.clientServicesInstance.moveFile(tempUrl: localURL!, fileName: resourceName)
+        
+        //Reloading should be done on the main thread
+        DispatchQueue.main.async {
+            self.fileList.reloadData()
+        }
     }
     
     //Gets called when you press done in browser view controller

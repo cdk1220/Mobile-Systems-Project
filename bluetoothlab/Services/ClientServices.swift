@@ -33,29 +33,23 @@ class ClientServices {
         //Returns string path to documents
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         docPathString = paths[0]
-    }
-    
-    //This function handles creating new files
-    func createAFile(fileName: String, content: Data) {
-        let path = docPathString + fileName + ".txt"                                           //Path to file
-        let result = fileManager.createFile(atPath: path, contents: content, attributes: nil)  //Create file
         
-        //Show results
-        if result {
-            print("File creation successful\n")
+        //Delete everything before starting the service
+        do {
+            let contents = try fileManager.contentsOfDirectory(atPath: docPathString)
             
-            //Entry was created when the directory structure was received. Edit it now.
-            //var i: Int
-            for i in 0...availableFiles.count {
-                if availableFiles[i].name  == fileName {
-                    availableFiles[i].availability = "local"
-                    availableFiles[i].stringPath = path
+            //Clear everything in the docs directory
+            for file in contents {
+                do {
+                    try fileManager.removeItem(atPath: docPathString + "/" + file)
+                    print("Delete successful")
+                } catch let error as NSError {
+                    print(error.localizedDescription)
                 }
             }
             
-        }
-        else {
-            print("File creation unsuccessful\n")
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
     }
     
@@ -117,5 +111,32 @@ class ClientServices {
     //Returns the available files as a list
     func getFiles() -> [FileEntry]{
         return self.availableFiles
+    }
+    
+    //Called to grab the file from a URL and place in the document directory
+    func moveFile(tempUrl: URL, fileName: String) {
+        //ls
+        do {
+            try print(fileManager.contentsOfDirectory(atPath: docPathString))
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        do {
+            let destPath = docPathString + "/" + fileName + ".txt"
+            try fileManager.moveItem(atPath: urlToString(url: tempUrl), toPath: destPath)
+            
+            //Model the change
+            var i = 0
+            for file in availableFiles {
+                if file.name == fileName {
+                    availableFiles[i].availability = "local"
+                    availableFiles[i].stringPath = destPath
+                }
+                
+                i = i + 1
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
 }

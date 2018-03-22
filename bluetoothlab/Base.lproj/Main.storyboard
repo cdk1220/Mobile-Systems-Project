@@ -301,34 +301,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="si9-hW-e4Q">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="si9-hW-e4Q">
                                                     <rect key="frame" x="0.0" y="11" width="235" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="2Vx-Od-Wdo"/>
-                                                        <constraint firstAttribute="width" constant="235" id="hN6-SP-Wp8"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDO-kb-Gs5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDO-kb-Gs5">
                                                     <rect key="frame" x="289" y="12" width="86" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="FpS-XQ-M87"/>
-                                                        <constraint firstAttribute="width" constant="86" id="Pdw-Ht-2aP"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="tintColor" red="0.91994243860244751" green="0.40672510862350464" blue="0.22841277718544006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="aDO-kb-Gs5" firstAttribute="top" secondItem="jHd-rD-5JS" secondAttribute="top" constant="12" id="KA3-Lf-w0M"/>
-                                                <constraint firstItem="si9-hW-e4Q" firstAttribute="top" secondItem="jHd-rD-5JS" secondAttribute="top" constant="11" id="Krp-we-xHn"/>
-                                                <constraint firstAttribute="trailing" secondItem="aDO-kb-Gs5" secondAttribute="trailing" id="L2I-si-S3I"/>
-                                                <constraint firstItem="si9-hW-e4Q" firstAttribute="leading" secondItem="jHd-rD-5JS" secondAttribute="leading" id="mPt-fV-Hlm"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="availability" destination="aDO-kb-Gs5" id="1hm-Eg-ZJR"/>
