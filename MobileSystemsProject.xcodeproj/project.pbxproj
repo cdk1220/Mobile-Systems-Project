@@ -37,7 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E0DFF8C205CC960008AEF78 /* bluetoothlab-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bluetoothlab-Bridging-Header.h"; sourceTree = "<group>"; };
+		1E0DFF8C205CC960008AEF78 /* MobileSystemsProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MobileSystemsProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E0DFF8D205CC961008AEF78 /* NSObject+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+test.h"; sourceTree = "<group>"; };
 		1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guide-logo.jpg"; sourceTree = "<group>"; };
 		1E5DA425205DD262004312D2 /* FileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileEntry.swift; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		1E5DA42A2060C18F004312D2 /* ClientServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientServices.swift; sourceTree = "<group>"; };
 		1E7FDAD6205D949100ABC9D4 /* ServerFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFileEntry.swift; sourceTree = "<group>"; };
 		1E7FDAD8205D94B100ABC9D4 /* ClientFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientFileEntry.swift; sourceTree = "<group>"; };
-		1EB1E833201A390E00152D17 /* bluetoothlab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetoothlab.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EB1E833201A390E00152D17 /* MobileSystemsProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileSystemsProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB1E836201A390E00152D17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EB1E838201A390E00152D17 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1EB1E83B201A390E00152D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		1EB1E82A201A390E00152D17 = {
 			isa = PBXGroup;
 			children = (
-				1EB1E835201A390E00152D17 /* bluetoothlab */,
+				1EB1E835201A390E00152D17 /* MobileSystemsProject */,
 				1EB1E834201A390E00152D17 /* Products */,
 				1EB1E848201C3C8900152D17 /* Frameworks */,
 			);
@@ -117,12 +117,12 @@
 		1EB1E834201A390E00152D17 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1EB1E833201A390E00152D17 /* bluetoothlab.app */,
+				1EB1E833201A390E00152D17 /* MobileSystemsProject.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1EB1E835201A390E00152D17 /* bluetoothlab */ = {
+		1EB1E835201A390E00152D17 /* MobileSystemsProject */ = {
 			isa = PBXGroup;
 			children = (
 				1E5DA427205DD3B9004312D2 /* Services */,
@@ -134,11 +134,11 @@
 				1EB1E83A201A390E00152D17 /* Main.storyboard */,
 				1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */,
 				1E0DFF8D205CC961008AEF78 /* NSObject+test.h */,
-				1E0DFF8C205CC960008AEF78 /* bluetoothlab-Bridging-Header.h */,
+				1E0DFF8C205CC960008AEF78 /* MobileSystemsProject-Bridging-Header.h */,
 				1EB1E842201A390E00152D17 /* Info.plist */,
 				1EB1E83D201A390E00152D17 /* Assets.xcassets */,
 			);
-			path = bluetoothlab;
+			path = MobileSystemsProject;
 			sourceTree = "<group>";
 		};
 		1EB1E848201C3C8900152D17 /* Frameworks */ = {
@@ -152,9 +152,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1EB1E832201A390E00152D17 /* bluetoothlab */ = {
+		1EB1E832201A390E00152D17 /* MobileSystemsProject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1EB1E845201A390E00152D17 /* Build configuration list for PBXNativeTarget "bluetoothlab" */;
+			buildConfigurationList = 1EB1E845201A390E00152D17 /* Build configuration list for PBXNativeTarget "MobileSystemsProject" */;
 			buildPhases = (
 				1EB1E82F201A390E00152D17 /* Sources */,
 				1EB1E830201A390E00152D17 /* Frameworks */,
@@ -165,9 +165,9 @@
 			);
 			dependencies = (
 			);
-			name = bluetoothlab;
+			name = MobileSystemsProject;
 			productName = bluetoothlab;
-			productReference = 1EB1E833201A390E00152D17 /* bluetoothlab.app */;
+			productReference = 1EB1E833201A390E00152D17 /* MobileSystemsProject.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -190,7 +190,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1EB1E82E201A390E00152D17 /* Build configuration list for PBXProject "bluetoothlab" */;
+			buildConfigurationList = 1EB1E82E201A390E00152D17 /* Build configuration list for PBXProject "MobileSystemsProject" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -203,7 +203,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1EB1E832201A390E00152D17 /* bluetoothlab */,
+				1EB1E832201A390E00152D17 /* MobileSystemsProject */,
 			);
 		};
 /* End PBXProject section */
@@ -375,11 +375,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EP4K2BVKV2;
-				INFOPLIST_FILE = bluetoothlab/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MobileSystemsProject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.don.bluetoothlab;
+				PRODUCT_BUNDLE_IDENTIFIER = com.don.MobileSystemsProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "bluetoothlab/bluetoothlab-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MobileSystemsProject/MobileSystemsProject-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -393,11 +393,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EP4K2BVKV2;
-				INFOPLIST_FILE = bluetoothlab/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MobileSystemsProject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.don.bluetoothlab;
+				PRODUCT_BUNDLE_IDENTIFIER = com.don.MobileSystemsProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "bluetoothlab/bluetoothlab-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MobileSystemsProject/MobileSystemsProject-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -406,7 +406,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1EB1E82E201A390E00152D17 /* Build configuration list for PBXProject "bluetoothlab" */ = {
+		1EB1E82E201A390E00152D17 /* Build configuration list for PBXProject "MobileSystemsProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1EB1E843201A390E00152D17 /* Debug */,
@@ -415,7 +415,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1EB1E845201A390E00152D17 /* Build configuration list for PBXNativeTarget "bluetoothlab" */ = {
+		1EB1E845201A390E00152D17 /* Build configuration list for PBXNativeTarget "MobileSystemsProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1EB1E846201A390E00152D17 /* Debug */,
