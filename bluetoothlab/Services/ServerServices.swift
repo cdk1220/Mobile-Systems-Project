@@ -120,4 +120,18 @@ class ServerServices {
         
         return specialString
     }
+    
+    //This function returns the path of the file given the name of the file
+    func returnURLGivenTheName(nameGiven: String) -> URL {
+        
+        //Go through list and if there is a match return that
+        for fileEntry in availableFiles {
+            
+            if fileEntry.name == nameGiven {
+                return stringToUrl(stringPath: fileEntry.stringPath)
+            }
+        }
+        
+        return stringToUrl(stringPath: "")
+    }
 }

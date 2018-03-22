@@ -147,7 +147,12 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
                 print(error.localizedDescription)
             }
         }
-       
+            
+        //Otherwise, the client is requesting for a file
+        else {
+            let path = ServerServices.serverServicesInstance.returnURLGivenTheName(nameGiven: stringReceived!)
+            self.session.sendResource(at: path, withName: stringReceived!, toPeer: self.session.connectedPeers[0], withCompletionHandler: nil)
+        }
     }
     
     //Gets called when client streams are received
