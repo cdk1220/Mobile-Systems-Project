@@ -30,6 +30,7 @@ class ServerServices {
     
     //This function prepares and initializes variables before using the services offered by the class
     func prepare() {
+        
         //Getting the URL to documents
         docURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
@@ -85,6 +86,7 @@ class ServerServices {
     
     //This function handles deleting files
     func deleteFile(path: String) {
+        
         do {
             try fileManager.removeItem(atPath: path)
             

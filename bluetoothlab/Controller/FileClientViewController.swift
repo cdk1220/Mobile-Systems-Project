@@ -30,6 +30,7 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Prepare client services
         ClientServices.clientServicesInstance.prepare()
 
         //Request file button setup
@@ -65,6 +66,7 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     
     //Populating the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = fileList.dequeueReusableCell(withIdentifier: "ClientFileEntry") as? ClientFileEntry {
             let clientFileEntry = ClientServices.clientServicesInstance.getFiles()[indexPath.row]
             cell.updateView(fileEntry: clientFileEntry)

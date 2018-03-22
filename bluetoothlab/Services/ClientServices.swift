@@ -27,6 +27,7 @@ class ClientServices {
     
     //This function prepares and initializes variables before using the services offered by the class
     func prepare() {
+        
         //Getting the URL to documents
         docURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
@@ -79,6 +80,7 @@ class ClientServices {
     
     //This function handles deleting files
     func deleteFile(path: String) {
+        
         do {
             try fileManager.removeItem(atPath: path)
             
@@ -115,12 +117,7 @@ class ClientServices {
     
     //Called to grab the file from a URL and place in the document directory
     func moveFile(tempUrl: URL, fileName: String) {
-        //ls
-        do {
-            try print(fileManager.contentsOfDirectory(atPath: docPathString))
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
+   
         do {
             let destPath = docPathString + "/" + fileName + ".txt"
             try fileManager.moveItem(atPath: urlToString(url: tempUrl), toPath: destPath)

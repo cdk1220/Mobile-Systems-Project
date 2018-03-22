@@ -29,8 +29,6 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(serviceID)
-        
         //Prepare server services
         ServerServices.serverServicesInstance.prepare()
         
@@ -62,6 +60,7 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     
     //Populating the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = fileList.dequeueReusableCell(withIdentifier: "ServerFileEntry") as? ServerFileEntry {
             let serverFileEntry = ServerServices.serverServicesInstance.getFiles()[indexPath.row]
             cell.updateView(fileEntry: serverFileEntry)
