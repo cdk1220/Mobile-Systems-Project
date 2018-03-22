@@ -157,10 +157,30 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     
     //Action handler for download file is pressed
     @IBAction func downloadButtonPressed(_ sender: Any) {
-        //Request file content
-        //Create file and save it
-        //Edit the list
-        //Reload the table
+        let index = fileList.indexPathForSelectedRow
+        
+        //Try to download if only something is selected
+        if index != nil {
+            let currentCell = fileList.cellForRow(at: index!)! as! ClientFileEntry
+            
+            //Download files that aren't locally availble
+            if currentCell.availability.text! == "remote" {
+                
+                //Send server a message asking for the file content
+                let message = currentCell.fileName.text!.data(using: .utf8)
+                do {
+                    try self.session.send(message!, toPeers: self.session.connectedPeers, with: MCSessionSendDataMode.reliable)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+            else {
+                let alert = UIAlertController(title: "Alert", message: "File is local!", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+    
+        }
     }
     
     //Gets executed when the connection with server gets dropped
