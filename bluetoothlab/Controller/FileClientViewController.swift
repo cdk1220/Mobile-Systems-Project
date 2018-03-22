@@ -198,6 +198,13 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        //Notification when the server has created a new file
+        else if specialString == "New file created!" {
+            let alert = UIAlertController(title: "Alert", message: specialString, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        //Directory content received
         else {
             ClientServices.clientServicesInstance.createFileEntries(specialString: specialString!)
             

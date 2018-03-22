@@ -77,6 +77,15 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     @IBAction func createButtonPressed(_ sender: Any) {
         ServerServices.serverServicesInstance.createAFile()
         
+        //Notify client when new file is created
+        let notification = "New file created!"
+        
+        do {
+            try self.session.send(notification.data(using: .utf8)!, toPeers: self.session.connectedPeers, with: MCSessionSendDataMode.unreliable)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
         //Reloading should be done on the main thread
         DispatchQueue.main.async {
             self.fileList.reloadData()
