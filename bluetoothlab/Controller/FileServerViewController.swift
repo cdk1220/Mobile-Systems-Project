@@ -126,9 +126,19 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     
     //When client requests in the form of data get received, this gets called
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
         let stringReceived = String.init(data: data, encoding: String.Encoding.utf8)
-        print(stringReceived)
+        
+        //If received string is 'directory,' that means client wants directory content
+        if stringReceived == "Directory" {
+            let specialString = ServerServices.serverServicesInstance.getDirectoryContentInSpecialString()
+            
+            do {
+                try self.session.send(specialString.data(using: .utf8)!, toPeers: self.session.connectedPeers, with: MCSessionSendDataMode.unreliable)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+       
     }
     
     //Gets called when client streams are received

@@ -166,7 +166,8 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     
     //When server sends data, this gets called
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print(String.init(data: data, encoding: String.Encoding.utf8)!)
+        let specialString = String.init(data: data, encoding: .utf8)
+        print(specialString)
     }
     
     //Gets called when server opens a stream

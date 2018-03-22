@@ -108,4 +108,16 @@ class ServerServices {
     func getFiles() -> [FileEntry]{
         return self.availableFiles
     }
+    
+    //This function creates a special string with the names of content in the directory
+    func getDirectoryContentInSpecialString() -> String {
+        var specialString: String = ""
+        
+        //Traverse through the available file list and fetch their names
+        for file in availableFiles {
+            specialString = specialString + file.name + "\r\n"
+        }
+        
+        return specialString
+    }
 }
