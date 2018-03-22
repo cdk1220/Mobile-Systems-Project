@@ -167,7 +167,21 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
     //When server sends data, this gets called
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         let specialString = String.init(data: data, encoding: .utf8)
-        print(specialString)
+        
+        //If special string is empty, that means the server doesn't have any content in its directory
+        if specialString == "" {
+            let alert = UIAlertController(title: "Alert", message: "Server has no content!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            ClientServices.clientServicesInstance.createFileEntries(specialString: specialString!)
+            
+            DispatchQueue.main.async {
+                self.fileList.reloadData()
+            }
+            
+        }
     }
     
     //Gets called when server opens a stream

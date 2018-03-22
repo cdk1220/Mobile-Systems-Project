@@ -45,7 +45,7 @@ class ClientServices {
             print("File creation successful\n")
             
             //Entry was created when the directory structure was received. Edit it now.
-            var i: Int
+            //var i: Int
             for i in 0...availableFiles.count {
                 if availableFiles[i].name  == fileName {
                     availableFiles[i].availability = "local"
@@ -60,8 +60,27 @@ class ClientServices {
     }
     
     //This function handles creating file entries upon receiving directory content from the server
-    func createFileEntries() {
+    func createFileEntries(specialString: String) {
         
+        //Empty the current list and delete all files
+        for fileEntry in availableFiles {
+            do {
+                try fileManager.removeItem(atPath: fileEntry.stringPath)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+        
+        //Remove all the current entries
+        availableFiles.removeAll()
+        
+        let content = specialString.split(separator: "\r\n")
+        
+        //Model the content
+        for newName in content {
+            let newEntry = FileEntry(name: String(newName), availability: "remote", stringPath: "n/a")
+            availableFiles.append(newEntry)
+        }
     }
     
     //This function handles deleting files
