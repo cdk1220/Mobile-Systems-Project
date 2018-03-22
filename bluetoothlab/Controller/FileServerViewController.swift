@@ -76,7 +76,11 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
     //Create button action handler
     @IBAction func createButtonPressed(_ sender: Any) {
         ServerServices.serverServicesInstance.createAFile()
-        fileList.reloadData()
+        
+        //Reloading should be done on the main thread
+        DispatchQueue.main.async {
+            self.fileList.reloadData()
+        }
     }
     
     //Delete button action handler
@@ -91,7 +95,12 @@ class FileServerViewController: UIViewController, UITableViewDataSource, UITable
             for file in ServerServices.serverServicesInstance.getFiles() {
                 if currentCell.fileName.text == file.name {
                     ServerServices.serverServicesInstance.deleteFile(path: file.stringPath)
-                    fileList.reloadData()
+                    
+                    //Reloading should be done on the main thread
+                    DispatchQueue.main.async {
+                        self.fileList.reloadData()
+                    }
+                    
                     break
                 }
                 i = i + 1

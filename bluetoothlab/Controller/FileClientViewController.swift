@@ -118,7 +118,11 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
                 for file in ClientServices.clientServicesInstance.getFiles() {
                     if currentCell.fileName.text == file.name {
                         ClientServices.clientServicesInstance.deleteFile(path: file.stringPath)
-                        fileList.reloadData()
+                        
+                        //Reloading should be done on the main thread
+                        DispatchQueue.main.async {
+                            self.fileList.reloadData()
+                        }
                         break
                     }
                     i = i + 1
@@ -177,10 +181,10 @@ class FileClientViewController: UIViewController, UITableViewDataSource, UITable
         else {
             ClientServices.clientServicesInstance.createFileEntries(specialString: specialString!)
             
+            //Reloading should be done on the main thread
             DispatchQueue.main.async {
                 self.fileList.reloadData()
             }
-            
         }
     }
     
