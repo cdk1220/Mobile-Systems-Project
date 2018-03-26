@@ -23,54 +23,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Introduction to Bluetooth " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k09-VM-QZu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Systems Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k09-VM-QZu">
                                 <rect key="frame" x="56.5" y="50" width="262" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="262" id="RkV-m7-hgZ"/>
-                                    <constraint firstAttribute="height" constant="28" id="dBf-ym-1R9"/>
+                                    <constraint firstAttribute="width" constant="262" id="IBL-hy-010"/>
+                                    <constraint firstAttribute="height" constant="28" id="mbf-VI-Ql8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don Kuruppu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-2P-pSk">
-                                <rect key="frame" x="136" y="593" width="103" height="24"/>
+                                <rect key="frame" x="136" y="606" width="103" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="FJY-3a-68t"/>
-                                    <constraint firstAttribute="width" constant="103" id="mg0-IJ-x58"/>
+                                    <constraint firstAttribute="height" constant="24" id="80G-r0-lab"/>
+                                    <constraint firstAttribute="width" constant="103" id="KaE-uB-L82"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarek Salem" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcp-6b-8rB">
-                                <rect key="frame" x="142" y="566" width="91" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="I93-v4-6uL"/>
-                                    <constraint firstAttribute="width" constant="91" id="MuF-Yw-Bl8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide-logo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0e0-vr-E9o">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppConnectivity.png" translatesAutoresizingMaskIntoConstraints="NO" id="0e0-vr-E9o">
                                 <rect key="frame" x="29.5" y="115" width="316" height="437"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="316" id="8Z4-DB-G7o"/>
-                                    <constraint firstAttribute="height" constant="437" id="nhR-y5-cHd"/>
+                                    <constraint firstAttribute="width" constant="316" id="w7I-1H-XWe"/>
+                                    <constraint firstAttribute="height" constant="437" id="xbo-oL-s9Y"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarek Salem" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcp-6b-8rB">
+                                <rect key="frame" x="142" y="580" width="91" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="2vv-GY-ZG6"/>
+                                    <constraint firstAttribute="height" constant="24" id="QFw-HA-lbs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="u6z-2P-pSk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5j9-cf-5m6"/>
-                            <constraint firstItem="k09-VM-QZu" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6WS-xr-hzw"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="u6z-2P-pSk" secondAttribute="bottom" constant="50" id="K75-65-rey"/>
-                            <constraint firstItem="0e0-vr-E9o" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PGw-1f-Fx9"/>
-                            <constraint firstItem="rcp-6b-8rB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZAT-O8-5R9"/>
-                            <constraint firstItem="k09-VM-QZu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="lsJ-We-QVy"/>
-                            <constraint firstItem="0e0-vr-E9o" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qv6-10-B0t"/>
-                            <constraint firstItem="u6z-2P-pSk" firstAttribute="top" secondItem="rcp-6b-8rB" secondAttribute="bottom" constant="3" id="yVJ-Mt-Oss"/>
+                            <constraint firstItem="k09-VM-QZu" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="0xu-MT-kJD"/>
+                            <constraint firstItem="u6z-2P-pSk" firstAttribute="top" secondItem="rcp-6b-8rB" secondAttribute="bottom" constant="2" id="FG7-9T-g9x"/>
+                            <constraint firstItem="u6z-2P-pSk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Hpr-Pp-Xrd"/>
+                            <constraint firstItem="0e0-vr-E9o" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="LUz-WG-taJ"/>
+                            <constraint firstItem="rcp-6b-8rB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Nvy-a9-RLQ"/>
+                            <constraint firstItem="rcp-6b-8rB" firstAttribute="top" secondItem="0e0-vr-E9o" secondAttribute="bottom" constant="28" id="O3S-46-ogc"/>
+                            <constraint firstItem="k09-VM-QZu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="Orb-w3-vuH"/>
+                            <constraint firstItem="0e0-vr-E9o" firstAttribute="top" secondItem="k09-VM-QZu" secondAttribute="bottom" constant="37" id="uee-sv-g4q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -81,6 +81,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="guide-logo.jpg" width="800" height="800"/>
+        <image name="AppConnectivity.png" width="1440" height="600"/>
     </resources>
 </document>

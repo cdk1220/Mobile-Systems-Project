@@ -18,6 +18,7 @@
 		1EB1E83C201A390E00152D17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83A201A390E00152D17 /* Main.storyboard */; };
 		1EB1E83E201A390E00152D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83D201A390E00152D17 /* Assets.xcassets */; };
 		1EB1E841201A390E00152D17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */; };
+		1EB5EC9F20695B56003B1236 /* AppConnectivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EB5EC9E20695B55003B1236 /* AppConnectivity.png */; };
 		1EBDA470205D7B2500216881 /* FileServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBDA46F205D7B2500216881 /* FileServerViewController.swift */; };
 		1EBDA472205D7B3200216881 /* FileClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBDA471205D7B3200216881 /* FileClientViewController.swift */; };
 		1EC9B09B20258DE400522E4A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC9B09A20258DE400522E4A /* CoreBluetooth.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -52,6 +53,7 @@
 		1EB1E83D201A390E00152D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EB1E840201A390E00152D17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1EB1E842201A390E00152D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EB5EC9E20695B55003B1236 /* AppConnectivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppConnectivity.png; sourceTree = "<group>"; };
 		1EBDA46F205D7B2500216881 /* FileServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerViewController.swift; sourceTree = "<group>"; };
 		1EBDA471205D7B3200216881 /* FileClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileClientViewController.swift; sourceTree = "<group>"; };
 		1EC9B09A20258DE400522E4A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -130,6 +132,7 @@
 				1E7FDAD5205D931D00ABC9D4 /* View */,
 				1E7FDAD2205D92F000ABC9D4 /* Controller */,
 				1E2BE04620213A7D00A8B6C7 /* guide-logo.jpg */,
+				1EB5EC9E20695B55003B1236 /* AppConnectivity.png */,
 				1EB1E836201A390E00152D17 /* AppDelegate.swift */,
 				1EB1E83A201A390E00152D17 /* Main.storyboard */,
 				1EB1E83F201A390E00152D17 /* LaunchScreen.storyboard */,
@@ -215,6 +218,7 @@
 			files = (
 				1EB1E841201A390E00152D17 /* LaunchScreen.storyboard in Resources */,
 				1E2BE04720213A7D00A8B6C7 /* guide-logo.jpg in Resources */,
+				1EB5EC9F20695B56003B1236 /* AppConnectivity.png in Resources */,
 				1EB1E83E201A390E00152D17 /* Assets.xcassets in Resources */,
 				1EB1E83C201A390E00152D17 /* Main.storyboard in Resources */,
 			);
